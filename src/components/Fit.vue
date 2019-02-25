@@ -7,6 +7,15 @@
         :value="geojson"
       ></codemirror>
       <button class="btn" type="button" @click="refresh">REFRESH</button>
+      &nbsp;|&nbsp;
+      <a
+        class="btn"
+        v-bind:href="buttonDownload.href"
+        v-bind:download="buttonDownload.download"
+        type="button"
+        @click="download"
+        >DOWNLOAD</a
+      >
     </div>
     <div class="dropzone-container" v-else>
       <vue-dropzone
@@ -14,9 +23,10 @@
         :options="dropOptions"
         @vdropzone-file-added="addedfile"
       ></vue-dropzone>
-      <label class="btn -upload"
-        >Read FIT File <input type="file" @change="loadFitFromFile"
-      /></label>
+      <label class="btn -upload">
+        Read FIT File
+        <input type="file" @change="loadFitFromFile" />
+      </label>
     </div>
   </div>
 </template>
@@ -32,6 +42,10 @@ export default {
     return {
       status: 'Select your FIT file',
       geojson: '',
+      buttonDownload: {
+        href: '',
+        download: 'download.geojson'
+      },
       dropOptions: {
         url: () => '',
         autoDiscover: false,
@@ -105,6 +119,12 @@ export default {
     refresh() {
       this.geojson = ''
     },
+    download() {
+      var blob = new Blob([this.geojson], { type: 'application/geojson' })
+      var url = URL.createObjectURL(blob)
+      this.buttonDownload.href = url
+      this.buttonDownload.download = 'download.geojson'
+    },
     loadFitFromFile(ev) {
       console.log(ev.target.files[0])
       const file = ev.target.files[0]
@@ -143,9 +163,9 @@ export default {
 .btn {
   margin: 20px 0 0;
   padding: 10px 14px;
-  color: #ffffff;
+  color: #000;
   font-size: 16px;
-  background: #42b983;
+  background-color: #42b983;
   border-radius: 4px;
   border: none;
   cursor: pointer;
