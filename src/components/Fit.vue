@@ -1,15 +1,12 @@
 <template>
   <div>
-    <h2>Load Fit File</h2>
+    <h1>Fit 2 geojson</h1>
     <label class="text-reader">
       Read FIT File
       <input type="file" @change="loadFitFromFile" />
     </label>
     <div class="status">{{ status }}</div>
-    <textarea rows="4" cols="50"
-      >{{ geojson }}
-</textarea
-    >
+    <textarea v-model="geojson" rows="40" cols="120"></textarea>
   </div>
 </template>
 
@@ -24,18 +21,35 @@ export default {
   },
   methods: {
     transformData(data) {
-      this.geojson = JSON.stringify(data, null, 2)
+      console.log(data)
+      let geo = {}
+      geo.type = 'FeatureCollection'
+      geo.features = []
+
+      if (data && data.records) {
+        data.records.forEach(element => {
+          let f = {}
+          f.type = 'Feature'
+          f.properties = element
+          f.geometry = {}
+          f.geometry.type = 'Point'
+          f.geometry.coordinates = [element.position_long, element.position_lat]
+          geo.features.push(f)
+        })
+      }
+      this.geojson = JSON.stringify(geo, null, 2)
     },
     parseFitFile(result, reader) {
       console.log('STATUS:', reader.readyState) // readyState will be 0
       console.log(result)
+      // For documentation: https://github.com/pierremtb/easy-fit#new-easyfitobject-options
       var easyFit = new EasyFit({
         force: true,
         speedUnit: 'km/h',
         lengthUnit: 'km',
         temperatureUnit: 'kelvin',
         elapsedRecordField: true,
-        mode: 'cascade'
+        mode: 'both'
       })
 
       easyFit.parse(result, (error, data) => {
