@@ -4,13 +4,12 @@
       <h1>Fit 2 geojson</h1>
 
       <div class="nav">
-        <router-link :to="{ name: 'home' }">Home</router-link>
-        |
+        <router-link :to="{ name: 'home' }">Home</router-link>|
         <router-link :to="{ name: 'about' }">About</router-link>
       </div>
     </div>
     <div class="wrapper">
-      <router-view/>
+      <router-view />
     </div>
   </div>
 </template>
