@@ -19,7 +19,7 @@
       <p>
         Made with <span>❤</span> by
         <a href="https://github.com/roberto-butti">@roberto-butti</a>,
-        <a href="https://github.com/LucaDb">@LucaDb</a>
+        <a href="https://github.com/LucaDb">@LucaDb</a>,
         <a href="https://github.com/soloistco">@soloistco</a>
       </p>
     </footer>
@@ -84,6 +84,9 @@
   span {
     color: #fe201a;
     font-size: 24px;
+    line-height: 24px;
+    display: inline-block;
+    vertical-align: sub;
   }
 
   a {

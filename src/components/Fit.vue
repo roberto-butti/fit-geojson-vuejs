@@ -13,9 +13,9 @@
           v-bind:download="buttonDownload.download"
           type="button"
           @click="download"
-          >DOWNLOAD</a
-        >
-        or
+          >DOWNLOAD
+        </a>
+        &nbsp; or
         <a class="link" @click="refresh">Upload new file</a>
       </p>
     </div>
@@ -172,6 +172,12 @@ export default {
   border-radius: 4px;
   border: none;
   cursor: pointer;
+
+  &[type='button'],
+  &[type='reset'],
+  &[type='submit'] {
+    -webkit-appearance: none;
+  }
 
   &.-upload {
     position: relative;
