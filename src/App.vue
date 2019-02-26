@@ -19,7 +19,7 @@
       <p>
         Made with <span>❤</span> by
         <a href="https://github.com/roberto-butti">@roberto-butti</a>,
-        <a href="https://github.com/LucaDb">@LucaDb</a>
+        <a href="https://github.com/LucaDb">@LucaDb</a>,
         <a href="https://github.com/soloistco">@soloistco</a>
       </p>
     </footer>
@@ -52,18 +52,18 @@
   svg,
   h1 {
     vertical-align: middle;
-    font-weight: 400;
+    font-weight: 500;
     display: inline-block;
   }
 
   h1 {
     margin: 0 auto 0 0;
-    font-size: 32px;
+    font-size: 23px;
   }
 }
 
 .logo {
-  width: 48px;
+  width: 55px;
   margin: 0;
 }
 
@@ -84,6 +84,9 @@
   span {
     color: #fe201a;
     font-size: 24px;
+    line-height: 24px;
+    display: inline-block;
+    vertical-align: sub;
   }
 
   a {
