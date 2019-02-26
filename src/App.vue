@@ -52,18 +52,18 @@
   svg,
   h1 {
     vertical-align: middle;
-    font-weight: 400;
+    font-weight: 500;
     display: inline-block;
   }
 
   h1 {
     margin: 0 auto 0 0;
-    font-size: 32px;
+    font-size: 23px;
   }
 }
 
 .logo {
-  width: 48px;
+  width: 55px;
   margin: 0;
 }
 
