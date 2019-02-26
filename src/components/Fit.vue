@@ -1,32 +1,41 @@
 <template>
   <div class="container">
-    <div class="codemirror-container" v-if="geojson">
+    <div class="content" v-if="geojson">
       <codemirror
         id="codemirror"
         :options="cmOptions"
         :value="geojson"
       ></codemirror>
-      <button class="btn" type="button" @click="refresh">REFRESH</button>
-      &nbsp;|&nbsp;
-      <a
-        class="btn"
-        v-bind:href="buttonDownload.href"
-        v-bind:download="buttonDownload.download"
-        type="button"
-        @click="download"
-        >DOWNLOAD</a
-      >
+      <p>
+        <a
+          class="btn"
+          v-bind:href="buttonDownload.href"
+          v-bind:download="buttonDownload.download"
+          type="button"
+          @click="download"
+          >DOWNLOAD
+        </a>
+        &nbsp; or
+        <a class="link" @click="refresh">Upload new file</a>
+      </p>
     </div>
-    <div class="dropzone-container" v-else>
+    <div class="content" v-else>
       <vue-dropzone
         id="dropzone"
         :options="dropOptions"
+        :useCustomSlot="true"
         @vdropzone-file-added="addedfile"
-      ></vue-dropzone>
-      <label class="btn -upload">
-        Read FIT File
-        <input type="file" @change="loadFitFromFile" />
-      </label>
+      >
+        <div class="dropzone-custom-content">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path
+              d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"
+            />
+          </svg>
+          <strong>DRAG & DROP</strong>
+          <span>convert .fit file(from garmin, Zwift ...) to Geojson file</span>
+        </div>
+      </vue-dropzone>
     </div>
   </div>
 </template>
@@ -34,13 +43,17 @@
 <script>
 import EasyFit from 'easy-fit'
 import vueDropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.css'
+
 import { codemirror } from 'vue-codemirror'
-import 'codemirror/keymap/sublime.js'
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/theme/base16-light.css'
 
 export default {
   data() {
     return {
       status: 'Select your FIT file',
+      filename: '',
       geojson: '',
       buttonDownload: {
         href: '',
@@ -50,19 +63,12 @@ export default {
         url: () => '',
         autoDiscover: false,
         autoProcessQueue: false,
-        maxFiles: 1,
-        dictDefaultMessage: `
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/>
-          </svg>
-          <span>DRAG A FILE</span>
-        `
+        maxFiles: 1
       },
       cmOptions: {
         tabSize: 2,
         theme: 'base16-light',
         mode: 'text/javascript',
-        keyMap: 'sublime',
         lineNumbers: true,
         line: true
       }
@@ -123,20 +129,7 @@ export default {
       var blob = new Blob([this.geojson], { type: 'application/geojson' })
       var url = URL.createObjectURL(blob)
       this.buttonDownload.href = url
-      this.buttonDownload.download = 'download.geojson'
-    },
-    loadFitFromFile(ev) {
-      console.log(ev.target.files[0])
-      const file = ev.target.files[0]
-      const reader = new FileReader()
-      console.log('STATUS:', reader.readyState) // readyState will be 0
-
-      console.log('readin', file.size)
-      this.status = 'Parsing your FIT file, ' + file.size + ' bytes'
-
-      reader.onloadend = e => this.parseFitFile(e.target.result, reader)
-      reader.readAsArrayBuffer(file)
-      console.log('STATUS:', reader.readyState) // readyState will be 0
+      this.buttonDownload.download = `${this.filename}.geojson`
     },
     addedfile(file) {
       console.log(file)
@@ -144,6 +137,7 @@ export default {
       console.log('STATUS:', reader.readyState) // readyState will be 0
 
       console.log('readin', file.size)
+      this.filename = file.name.replace('.fit', '')
       this.status = 'Parsing your FIT file, ' + file.size + ' bytes'
 
       reader.onloadend = e => this.parseFitFile(e.target.result, reader)
@@ -157,18 +151,33 @@ export default {
 <style lang="scss">
 .container {
   width: 100%;
+  height: 100%;
   margin: auto;
+  display: flex;
+}
+
+.link {
+  color: #42b983;
+  cursor: pointer;
 }
 
 .btn {
-  margin: 20px 0 0;
-  padding: 10px 14px;
-  color: #000;
-  font-size: 16px;
+  margin: 40px 0 0;
+  padding: 8px 16px;
+  color: #fff;
+  font-size: 14px;
+  line-height: normal;
+  text-decoration: none;
   background-color: #42b983;
   border-radius: 4px;
   border: none;
   cursor: pointer;
+
+  &[type='button'],
+  &[type='reset'],
+  &[type='submit'] {
+    -webkit-appearance: none;
+  }
 
   &.-upload {
     position: relative;
@@ -188,34 +197,74 @@ export default {
   }
 }
 
+.content {
+  width: 100%;
+  margin: 50px 50px 100px;
+}
+
 #dropzone,
 #codemirror {
-  width: 80%;
-  max-width: 600px;
-  height: 500px;
-  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto 40px;
+  border-radius: 8px;
 }
 
 #dropzone {
+  color: #ccc;
   border: 2px dashed #ccc;
-  border-radius: 8px;
   display: flex;
   align-items: center;
+  transition: color 0.2s, background 0.2s, border 0.2s;
 
-  svg {
-    margin: 0 auto 10px;
-    display: block;
+  &.dz-started {
+    .dz-message {
+      display: block;
+    }
+
+    .dropzone-custom-content {
+      .massage {
+        display: none;
+      }
+      .loading {
+        display: block;
+      }
+    }
+  }
+
+  .dz-preview {
+    display: none;
   }
 
   .dz-message {
     margin: 0 auto;
   }
+
+  .dropzone-custom-content {
+    margin: 0 auto;
+    font-size: 14px;
+
+    .loading {
+      display: none;
+    }
+
+    svg {
+      width: 38px;
+      margin: 0 auto 20px;
+      display: block;
+    }
+
+    strong {
+      font-size: 18px;
+      display: block;
+    }
+  }
 }
 
 #codemirror {
-  height: 500px;
   text-align: left;
   border: 1px solid #ccc;
+  overflow: hidden;
 
   .CodeMirror {
     height: 100%;
