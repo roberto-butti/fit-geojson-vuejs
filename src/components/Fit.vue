@@ -13,8 +13,8 @@
           v-bind:download="buttonDownload.download"
           type="button"
           @click="download"
-          >DOWNLOAD
-        </a>
+          >DOWNLOAD</a
+        >
         &nbsp; or
         <a class="link" @click="refresh">Upload new file</a>
       </p>
@@ -30,10 +30,13 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path
               d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"
-            />
+            ></path>
           </svg>
           <strong>DRAG & DROP</strong>
-          <span>convert .fit file(from garmin, Zwift ...) to Geojson file</span>
+          <span>
+            convert .fit or .gpx file(from Garmin, Zwift, Strava ...) to Geojson
+            file
+          </span>
         </div>
       </vue-dropzone>
     </div>
@@ -42,6 +45,8 @@
 
 <script>
 import EasyFit from 'easy-fit'
+//import gpxParse from 'gpx-parse'
+
 import vueDropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.css'
 
@@ -52,7 +57,7 @@ import 'codemirror/theme/base16-light.css'
 export default {
   data() {
     return {
-      status: 'Select your FIT file',
+      status: 'Select your FIT or GPX file',
       filename: '',
       geojson: '',
       buttonDownload: {
@@ -79,7 +84,112 @@ export default {
     codemirror: codemirror
   },
   methods: {
-    transformData(data) {
+    get_gpx_data(node, result) {
+      if (!result) result = { segments: [] }
+
+      switch (node.nodeName) {
+        case 'name':
+          console.log(node.nodeName + ' = ' + node.textContent)
+          result.name = node.textContent
+
+          break
+
+        case 'trkseg':
+          var segment = []
+          result.segments.push(segment)
+          for (var i = 0; i < node.childNodes.length; i++) {
+            var snode = node.childNodes[i]
+            if (snode.nodeName == 'trkpt') {
+              var trkpt = {
+                loc: [
+                  parseFloat(snode.attributes['lat'].value),
+                  parseFloat(snode.attributes['lon'].value)
+                ]
+              }
+              for (var j = 0; j < snode.childNodes.length; j++) {
+                var ssnode = snode.childNodes[j]
+                switch (ssnode.nodeName) {
+                  case 'time':
+                    trkpt.time = new Date(ssnode.childNodes[0].data)
+                    break
+                  case 'ele':
+                    trkpt.ele = parseFloat(ssnode.childNodes[0].data)
+                    break
+                  case 'extensions':
+                    //var extNode = ssnode.childNodes
+                    //console.log(ssnode.childNodes)
+                    //extNode.forEach(element => {
+                    //console.log(element.power)
+                    //})
+                    break
+                }
+              }
+              segment.push(trkpt)
+            }
+          }
+          break
+      }
+
+      for (
+        var idxChildNodes = 0;
+        idxChildNodes < node.childNodes.length;
+        idxChildNodes++
+      ) {
+        this.get_gpx_data(node.childNodes[idxChildNodes], result)
+      }
+      return result
+    },
+
+    transformGpxData(data) {
+      console.log(data)
+      let geo = {}
+      geo.type = 'FeatureCollection'
+      geo.features = []
+
+      if (data && data.segments) {
+        data.segments[0].forEach(element => {
+          //console.error('elemento', element)
+          if (Array.isArray(element.loc)) {
+            let f = {}
+            f.type = 'Feature'
+            f.properties = element
+            f.geometry = {}
+            f.geometry.type = 'Point'
+            f.geometry.coordinates = [element.loc[1], element.loc[0]]
+            geo.features.push(f)
+          } else {
+            //console.error(element.loc)
+          }
+        })
+      }
+      this.geojson = JSON.stringify(geo, null, 2)
+    },
+    parseGpxFile(result, reader) {
+      console.log('STATUS:', reader.readyState) // readyState will be 0
+      //console.log(result)
+      var xml = new window.DOMParser().parseFromString(result, 'text/xml')
+      console.log(xml)
+      if (xml) {
+        var objGpx = this.get_gpx_data(xml.documentElement)
+        this.status = 'Loaded DATA!!!'
+        console.log(objGpx)
+        this.transformGpxData(objGpx)
+      } else {
+        this.status = 'Error parsing GPX'
+      }
+      /*
+      gpxParse.parseGpx(result, function(error, data) {
+        if (error) {
+          console.log(error)
+          this.status = 'Error !!!' + error
+        } else {
+          this.status = 'Loaded DATA!!!'
+          this.transformGpxData(data)
+        }
+      })
+      */
+    },
+    transformFitData(data) {
       console.log(data)
       let geo = {}
       geo.type = 'FeatureCollection'
@@ -118,7 +228,7 @@ export default {
           this.status = 'Error !!!' + error
         } else {
           this.status = 'Loaded DATA!!!'
-          this.transformData(data)
+          this.transformFitData(data)
         }
       })
     },
@@ -132,16 +242,26 @@ export default {
       this.buttonDownload.download = `${this.filename}.geojson`
     },
     addedfile(file) {
-      console.log(file)
+      console.log('Added file', file)
       const reader = new FileReader()
       console.log('STATUS:', reader.readyState) // readyState will be 0
-
       console.log('readin', file.size)
+      var extension = file.name
+        .split('.')
+        .pop()
+        .toLowerCase()
+
       this.filename = file.name.replace('.fit', '')
       this.status = 'Parsing your FIT file, ' + file.size + ' bytes'
+      if (extension == 'fit') {
+        reader.onloadend = e => this.parseFitFile(e.target.result, reader)
+        reader.readAsArrayBuffer(file)
+      }
+      if (extension == 'gpx') {
+        reader.onloadend = e => this.parseGpxFile(e.target.result, reader)
+        reader.readAsText(file)
+      }
 
-      reader.onloadend = e => this.parseFitFile(e.target.result, reader)
-      reader.readAsArrayBuffer(file)
       console.log('STATUS:', reader.readyState) // readyState will be 0
     }
   }
