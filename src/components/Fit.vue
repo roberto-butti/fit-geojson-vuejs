@@ -108,6 +108,7 @@ export default {
               }
               for (var j = 0; j < snode.childNodes.length; j++) {
                 var ssnode = snode.childNodes[j]
+
                 switch (ssnode.nodeName) {
                   case 'time':
                     trkpt.time = new Date(ssnode.childNodes[0].data)
@@ -116,7 +117,33 @@ export default {
                     trkpt.ele = parseFloat(ssnode.childNodes[0].data)
                     break
                   case 'extensions':
-                    //var extNode = ssnode.childNodes
+                    var extNodes = ssnode.childNodes
+                    for (
+                      var idxExtNode = 0;
+                      idxExtNode < extNodes.length;
+                      idxExtNode++
+                    ) {
+                      var extNode = extNodes[idxExtNode]
+                      //console.log(extNode.nodeName)
+                      if (extNode.nodeName == 'gpxtpx:TrackPointExtension') {
+                        //console.log(extNode)
+                        var trackPointNodes = extNode.childNodes
+                        for (
+                          var idxTrackPointNode = 0;
+                          idxTrackPointNode < trackPointNodes.length;
+                          idxTrackPointNode++
+                        ) {
+                          var trackPointNode =
+                            trackPointNodes[idxTrackPointNode]
+                          //console.log(trackPointNode.nodeName)
+                          if (trackPointNode.nodeName.startsWith('gpxtpx:')) {
+                            var gpxName = trackPointNode.nodeName.split(':')
+                            trkpt[gpxName[1]] =
+                              trackPointNode.childNodes[0].data
+                          }
+                        }
+                      }
+                    }
                     //console.log(ssnode.childNodes)
                     //extNode.forEach(element => {
                     //console.log(element.power)
