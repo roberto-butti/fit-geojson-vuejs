@@ -1,11 +1,7 @@
 <template>
   <div class="container">
     <div class="content" v-if="geojson">
-      <codemirror
-        id="codemirror"
-        :options="cmOptions"
-        :value="geojson"
-      ></codemirror>
+      <codemirror id="codemirror" :options="cmOptions" :value="geojson"></codemirror>
       <p>
         <a
           class="btn"
@@ -13,8 +9,7 @@
           v-bind:download="buttonDownload.download"
           type="button"
           @click="download"
-          >DOWNLOAD</a
-        >
+        >DOWNLOAD</a>
         &nbsp; or
         <a class="link" @click="refresh">Upload new file</a>
       </p>
@@ -48,7 +43,7 @@ import EasyFit from 'easy-fit'
 //import gpxParse from 'gpx-parse'
 
 import vueDropzone from 'vue2-dropzone'
-import 'vue2-dropzone/dist/vue2Dropzone.css'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
 import { codemirror } from 'vue-codemirror'
 import 'codemirror/lib/codemirror.css'
