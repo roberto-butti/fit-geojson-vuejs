@@ -217,21 +217,38 @@ export default {
       */
     },
     transformFitData(data) {
-      console.log(data)
+      //console.log(data)
       let geo = {}
       geo.type = 'FeatureCollection'
       geo.features = []
 
       if (data && data.records) {
-        data.records.forEach(element => {
-          let f = {}
-          f.type = 'Feature'
-          f.properties = element
-          f.geometry = {}
-          f.geometry.type = 'Point'
-          f.geometry.coordinates = [element.position_long, element.position_lat]
-          geo.features.push(f)
-        })
+        let prev_position_long = 0
+        let prev_position_lat = 0
+        let idx_records = 0
+        let element = {}
+        for (
+          idx_records = 0;
+          idx_records < data.records.length;
+          idx_records++
+        ) {
+          element = data.records[idx_records]
+
+          if (idx_records > 0) {
+            let f = {}
+            f.type = 'Feature'
+            f.properties = element
+            f.geometry = {}
+            f.geometry.type = 'LineString'
+            f.geometry.coordinates = [
+              [prev_position_long, prev_position_lat],
+              [element.position_long, element.position_lat]
+            ]
+            geo.features.push(f)
+          }
+          prev_position_long = element.position_long
+          prev_position_lat = element.position_lat
+        }
       }
       this.geojson = JSON.stringify(geo, null, 2)
     },
