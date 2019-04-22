@@ -48,7 +48,7 @@ import EasyFit from 'easy-fit'
 //import gpxParse from 'gpx-parse'
 
 import vueDropzone from 'vue2-dropzone'
-import 'vue2-dropzone/dist/vue2Dropzone.css'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
 import { codemirror } from 'vue-codemirror'
 import 'codemirror/lib/codemirror.css'
@@ -174,20 +174,38 @@ export default {
       geo.features = []
 
       if (data && data.segments) {
-        data.segments[0].forEach(element => {
+        let prev_position_long = 0
+        let prev_position_lat = 0
+        let idx_records = 0
+        let element = {}
+        for (
+          idx_records = 0;
+          idx_records < data.segments[0].length;
+          idx_records++
+        ) {
+          element = data.segments[0][idx_records]
+          //data.segments[0].forEach(element => {
           //console.error('elemento', element)
+
           if (Array.isArray(element.loc)) {
-            let f = {}
-            f.type = 'Feature'
-            f.properties = element
-            f.geometry = {}
-            f.geometry.type = 'Point'
-            f.geometry.coordinates = [element.loc[1], element.loc[0]]
-            geo.features.push(f)
+            if (idx_records > 0) {
+              let f = {}
+              f.type = 'Feature'
+              f.properties = element
+              f.geometry = {}
+              f.geometry.type = 'LineString'
+              f.geometry.coordinates = [
+                [prev_position_long, prev_position_lat],
+                [element.loc[1], element.loc[0]]
+              ]
+              geo.features.push(f)
+            }
+            prev_position_long = element.loc[1]
+            prev_position_lat = element.loc[0]
           } else {
             //console.error(element.loc)
           }
-        })
+        }
       }
       this.geojson = JSON.stringify(geo, null, 2)
     },
@@ -217,21 +235,38 @@ export default {
       */
     },
     transformFitData(data) {
-      console.log(data)
+      //console.log(data)
       let geo = {}
       geo.type = 'FeatureCollection'
       geo.features = []
 
       if (data && data.records) {
-        data.records.forEach(element => {
-          let f = {}
-          f.type = 'Feature'
-          f.properties = element
-          f.geometry = {}
-          f.geometry.type = 'Point'
-          f.geometry.coordinates = [element.position_long, element.position_lat]
-          geo.features.push(f)
-        })
+        let prev_position_long = 0
+        let prev_position_lat = 0
+        let idx_records = 0
+        let element = {}
+        for (
+          idx_records = 0;
+          idx_records < data.records.length;
+          idx_records++
+        ) {
+          element = data.records[idx_records]
+
+          if (idx_records > 0) {
+            let f = {}
+            f.type = 'Feature'
+            f.properties = element
+            f.geometry = {}
+            f.geometry.type = 'LineString'
+            f.geometry.coordinates = [
+              [prev_position_long, prev_position_lat],
+              [element.position_long, element.position_lat]
+            ]
+            geo.features.push(f)
+          }
+          prev_position_long = element.position_long
+          prev_position_lat = element.position_lat
+        }
       }
       this.geojson = JSON.stringify(geo, null, 2)
     },
