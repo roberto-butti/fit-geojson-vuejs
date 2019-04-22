@@ -1,7 +1,11 @@
 <template>
   <div class="container">
     <div class="content" v-if="geojson">
-      <codemirror id="codemirror" :options="cmOptions" :value="geojson"></codemirror>
+      <codemirror
+        id="codemirror"
+        :options="cmOptions"
+        :value="geojson"
+      ></codemirror>
       <p>
         <a
           class="btn"
@@ -9,7 +13,8 @@
           v-bind:download="buttonDownload.download"
           type="button"
           @click="download"
-        >DOWNLOAD</a>
+          >DOWNLOAD</a
+        >
         &nbsp; or
         <a class="link" @click="refresh">Upload new file</a>
       </p>
