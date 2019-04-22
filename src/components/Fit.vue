@@ -174,20 +174,38 @@ export default {
       geo.features = []
 
       if (data && data.segments) {
-        data.segments[0].forEach(element => {
+        let prev_position_long = 0
+        let prev_position_lat = 0
+        let idx_records = 0
+        let element = {}
+        for (
+          idx_records = 0;
+          idx_records < data.segments[0].length;
+          idx_records++
+        ) {
+          element = data.segments[0][idx_records]
+          //data.segments[0].forEach(element => {
           //console.error('elemento', element)
+
           if (Array.isArray(element.loc)) {
-            let f = {}
-            f.type = 'Feature'
-            f.properties = element
-            f.geometry = {}
-            f.geometry.type = 'Point'
-            f.geometry.coordinates = [element.loc[1], element.loc[0]]
-            geo.features.push(f)
+            if (idx_records > 0) {
+              let f = {}
+              f.type = 'Feature'
+              f.properties = element
+              f.geometry = {}
+              f.geometry.type = 'LineString'
+              f.geometry.coordinates = [
+                [prev_position_long, prev_position_lat],
+                [element.loc[1], element.loc[0]]
+              ]
+              geo.features.push(f)
+            }
+            prev_position_long = element.loc[1]
+            prev_position_lat = element.loc[0]
           } else {
             //console.error(element.loc)
           }
-        })
+        }
       }
       this.geojson = JSON.stringify(geo, null, 2)
     },
