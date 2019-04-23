@@ -1,7 +1,7 @@
 # Fit2Geojson
 
 Fit2Geojson is a web tool that converts your FIT or GPX files into GeoJson format.
-You can use the tool online: (Fit2Geojson)[https://fit2geojson.netlify.com/]
+You can use the tool online: [Fit2Geojson](https://fit2geojson.netlify.com/)
 
 ## FIT file
 
@@ -16,12 +16,12 @@ It is used by Strava.
 ## GeoJson
 
 It is a popular format into GEO context.
-For example is used by https://xyz.here.com/studio web tool, useful to create your custom maps.
+For example is used by [https://xyz.here.com/studio](https://xyz.here.com/studio) web tool, useful to create your custom maps.
 
 ## Tutorial
 
 I wrote a tutorial about how to create your styled custom Map starting from a Zwift activity.
-(Create your styled Map from your Zwift activity)[https://medium.com/@robertodev/create-your-map-from-your-zwift-activity-8818ff34b8d8]
+[Create your styled Map from your Zwift activity](https://medium.com/@robertodev/create-your-map-from-your-zwift-activity-8818ff34b8d8)
 
 # For Developers
 
