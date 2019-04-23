@@ -1,4 +1,13 @@
-# Fit2Geojson
+
+
+```
+ _____ _ _   ____   ____            _                 
+|  ___(_) |_|___ \ / ___| ___  ___ (_)___  ___  _ __  
+| |_  | | __| __) | |  _ / _ \/ _ \| / __|/ _ \| '_ \ 
+|  _| | | |_ / __/| |_| |  __/ (_) | \__ \ (_) | | | |
+|_|   |_|\__|_____|\____|\___|\___// |___/\___/|_| |_|
+                                 |__/                 
+```
 
 Fit2Geojson is a web tool that converts your FIT or GPX files into GeoJson format.
 You can use the tool online: [Fit2Geojson](https://fit2geojson.netlify.com/)
