@@ -1,29 +1,42 @@
-# fit-geojson
+
+
+```
+ _____ _ _   ____   ____            _                 
+|  ___(_) |_|___ \ / ___| ___  ___ (_)___  ___  _ __  
+| |_  | | __| __) | |  _ / _ \/ _ \| / __|/ _ \| '_ \ 
+|  _| | | |_ / __/| |_| |  __/ (_) | \__ \ (_) | | | |
+|_|   |_|\__|_____|\____|\___|\___// |___/\___/|_| |_|
+                                 |__/                 
+```
+
+Fit2Geojson is a web tool that converts your FIT or GPX files into GeoJson format.
+You can use the tool online: [Fit2Geojson](https://fit2geojson.netlify.com/)
+
+## FIT file
+
+FIT file is a format used to store fitness activities like biking, running, swimming.
+It is used by Garmin Devices and Zwift
+
+## GPX File
+
+GPX file is a format used to store workout activities like biking, running, swimming.
+It is used by Strava.
+
+## GeoJson
+
+It is a popular format into GEO context.
+For example is used by [https://xyz.here.com/studio](https://xyz.here.com/studio) web tool, useful to create your custom maps.
+
+## Tutorial
+
+I wrote a tutorial about how to create your styled custom Map starting from a Zwift activity.
+[Create your styled Map from your Zwift activity](https://medium.com/@robertodev/create-your-map-from-your-zwift-activity-8818ff34b8d8)
+
+# For Developers
 
 ## Project setup
+
 ```
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
