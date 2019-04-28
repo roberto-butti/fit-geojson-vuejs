@@ -24,7 +24,8 @@
         <a href="https://github.com/soloistco">@soloistco</a>
       </p>
       <p>
-        This tool is open source!!! Sources on
+        {{ $store.getters.appName }} v.{{ $store.getters.appVersion }}
+        #opensource on
         <a href="https://github.com/roberto-butti/fit-geojson-vuejs">Github</a>
       </p>
     </footer>
