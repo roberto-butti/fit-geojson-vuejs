@@ -35,6 +35,8 @@ I wrote a tutorial about how to:
 ## Project setup
 
 ```
+git clone https://github.com/roberto-butti/fit-geojson-vuejs.git
+nvm use
 npm install
 npm run serve
 ```
