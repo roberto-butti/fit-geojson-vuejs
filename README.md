@@ -1,12 +1,10 @@
-
-
 ```
- _____ _ _   ____   ____            _                 
-|  ___(_) |_|___ \ / ___| ___  ___ (_)___  ___  _ __  
-| |_  | | __| __) | |  _ / _ \/ _ \| / __|/ _ \| '_ \ 
+ _____ _ _   ____   ____            _
+|  ___(_) |_|___ \ / ___| ___  ___ (_)___  ___  _ __
+| |_  | | __| __) | |  _ / _ \/ _ \| / __|/ _ \| '_ \
 |  _| | | |_ / __/| |_| |  __/ (_) | \__ \ (_) | | | |
 |_|   |_|\__|_____|\____|\___|\___// |___/\___/|_| |_|
-                                 |__/                 
+                                 |__/
 ```
 
 Fit2Geojson is a web tool that converts your FIT or GPX files into GeoJson format.
@@ -29,8 +27,8 @@ For example is used by [https://xyz.here.com/studio](https://xyz.here.com/studio
 
 ## Tutorial
 
-I wrote a tutorial about how to create your styled custom Map starting from a Zwift activity.
-[Create your styled Map from your Zwift activity](https://medium.com/@robertodev/create-your-map-from-your-zwift-activity-8818ff34b8d8)
+I wrote a tutorial about how to:
+[Mapping your sport activity with HERE XYZ Studio](https://developer.here.com/blog/mapping-your-sport-activity-with-here-xyz-studio)
 
 # For Developers
 
