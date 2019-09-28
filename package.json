@@ -13,7 +13,7 @@
     "node-sass": "^4.12.0",
     "sanitize.css": "^8.0.1",
     "sass-loader": "^7.3.1",
-    "tar": "^4.4.10",
+    "tar": "^4.4.13",
     "vue": "^2.6.10",
     "vue-codemirror": "^4.0.6",
     "vue-router": "^3.1.3",
