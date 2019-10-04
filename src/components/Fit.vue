@@ -39,6 +39,11 @@
           </span>
         </div>
       </vue-dropzone>
+
+      Or import from URL
+      <input class="text-input" type="url" v-model="uploadURL" placeholder="https://your.domain/your-file.gpx">
+      <button class="btn" v-on:click="uploadfile">Upload</button>
+
     </div>
   </div>
 </template>
@@ -60,6 +65,7 @@ export default {
       status: 'Select your FIT or GPX file',
       filename: '',
       geojson: '',
+      uploadURL: '',
       buttonDownload: {
         href: '',
         download: 'download.geojson'
@@ -325,6 +331,14 @@ export default {
       }
 
       console.log('STATUS:', reader.readyState) // readyState will be 0
+    },
+    uploadfile() {
+      let proxyUrl = 'https://cors-anywhere.herokuapp.com/'
+      let filename = this.uploadURL.split('/').slice(-1)[0];
+      fetch(proxyUrl + this.uploadURL, {method: 'GET'})
+      .then(response => response.blob())
+      .then(data => new File([data], filename))
+      .then(file => this.addedfile(file));
     }
   }
 }
@@ -376,6 +390,19 @@ export default {
       z-index: -1;
       opacity: 0;
     }
+  }
+}
+
+.text-input {
+  border-radius: 4px;
+  border: solid 1px #ccc;
+  padding: 6px 8px;
+  margin: 0 10px;
+  width: 25%;
+
+  &:focus {
+    border-color: #42b983;
+    outline: 0;
   }
 }
 
