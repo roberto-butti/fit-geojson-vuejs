@@ -43,7 +43,13 @@
       <div class="row">
         <div class="col-12">
           Or import from URL
-          <input class="text-input" type="url" v-model="uploadURL" placeholder="https://your.domain/your-file.gpx">
+          <input
+            class="text-input"
+            type="url"
+            v-model="uploadURL"
+            placeholder="https://your.domain/your-file.gpx"
+          />
+
           <button class="btn" v-on:click="uploadfile">Upload</button>
         </div>
       </div>
@@ -337,11 +343,11 @@ export default {
     },
     uploadfile() {
       let proxyUrl = 'https://cors-anywhere.herokuapp.com/'
-      let filename = this.uploadURL.split('/').slice(-1)[0];
-      fetch(proxyUrl + this.uploadURL, {method: 'GET'})
-      .then(response => response.blob())
-      .then(data => new File([data], filename))
-      .then(file => this.addedfile(file));
+      let filename = this.uploadURL.split('/').slice(-1)[0]
+      fetch(proxyUrl + this.uploadURL, { method: 'GET' })
+        .then(response => response.blob())
+        .then(data => new File([data], filename))
+        .then(file => this.addedfile(file))
     }
   }
 }
