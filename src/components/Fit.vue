@@ -83,7 +83,8 @@ export default {
         url: () => '',
         autoDiscover: false,
         autoProcessQueue: false,
-        maxFiles: 1
+        maxFiles: 1,
+        acceptedFiles: '.gpx,.fit'
       },
       cmOptions: {
         tabSize: 2,

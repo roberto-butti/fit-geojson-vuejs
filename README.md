@@ -32,6 +32,12 @@ I wrote a tutorial about how to:
 
 # For Developers
 
+## Requirements
+
+* [Nodejs](https://nodejs.org/)
+* The latest version of [NPM](https://www.npmjs.com/get-npm). Update by `npm install npm@latest -g`
+* [NVM - Node Version Manager](https://github.com/nvm-sh/nvm)
+
 ## Project setup
 
 ```
