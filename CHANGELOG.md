@@ -2,13 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [Unreleased v0.1.4]
 
 ### Added
 
 - ChangeLog
 
 ### Changed
+
+- Some aesthetic improvement (footer) (thanks to ShradhaSangtani)
 
 ## v0.1.3
 
