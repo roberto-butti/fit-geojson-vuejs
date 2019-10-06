@@ -20,6 +20,11 @@
       </p>
     </div>
     <div class="content" v-else>
+      <div>
+        <div class="error" v-if="errormsg">
+          <p>{{ errormsg }}</p>
+        </div>
+      </div>
       <vue-dropzone
         id="dropzone"
         class="row"
@@ -33,10 +38,10 @@
               d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"
             />
           </svg>
-          <strong>DRAG & DROP</strong>
+          <strong>DRAG &amp; DROP</strong>
           <span>
-            convert .fit or .gpx file(from Garmin, Zwift, Strava ...) to Geojson
-            file
+            convert .fit or .gpx file (from Garmin, Zwift, Strava&hellip;) to
+            Geojson file
           </span>
         </div>
       </vue-dropzone>
@@ -74,6 +79,7 @@ export default {
       status: 'Select your FIT or GPX file',
       filename: '',
       geojson: '',
+      errormsg: '',
       uploadURL: '',
       buttonDownload: {
         href: '',
@@ -83,13 +89,13 @@ export default {
         url: () => '',
         autoDiscover: false,
         autoProcessQueue: false,
-        maxFiles: 1,
-        acceptedFiles: '.gpx,.fit'
+        acceptedFiles: '.gpx,.fit',
+        maxFiles: 1
       },
       cmOptions: {
         tabSize: 2,
         theme: 'base16-light',
-        mode: 'text/javascript',
+        mode: 'application/json',
         lineNumbers: true,
         line: true
       }
@@ -312,6 +318,7 @@ export default {
     },
     refresh() {
       this.geojson = ''
+      this.errormsg = ''
     },
     download() {
       var blob = new Blob([this.geojson], { type: 'application/geojson' })
@@ -334,10 +341,13 @@ export default {
       if (extension == 'fit') {
         reader.onloadend = e => this.parseFitFile(e.target.result, reader)
         reader.readAsArrayBuffer(file)
-      }
-      if (extension == 'gpx') {
+      } else if (extension == 'gpx') {
         reader.onloadend = e => this.parseGpxFile(e.target.result, reader)
         reader.readAsText(file)
+      } else {
+        this.status = 'Not a .fit ot .gpx file. Please try uploading again.'
+        this.errormsg = this.status
+        console.log('Invalid file extension')
       }
 
       console.log('STATUS:', reader.readyState) // readyState will be 0
@@ -479,6 +489,16 @@ export default {
       display: block;
     }
   }
+}
+
+.error {
+  margin: 7px 0;
+  padding: 7px 11px 4px;
+  background: #fce4e4;
+  font-weight: bold;
+  color: #c03;
+  line-height: 20px;
+  border-radius: 8px;
 }
 
 #codemirror {
