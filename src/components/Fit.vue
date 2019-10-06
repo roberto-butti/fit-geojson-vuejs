@@ -6,39 +6,70 @@
         :options="cmOptions"
         :value="geojson"
       ></codemirror>
-      <p>
-        <a
-          class="btn"
-          v-bind:href="buttonDownload.href"
-          v-bind:download="buttonDownload.download"
-          type="button"
-          @click="download"
-          >DOWNLOAD</a
-        >
+      <div>
+        <div class="btn-download">
+          <a
+            class="btn btn-dropdown--first"
+            v-bind:href="buttonDownload.href"
+            v-bind:download="buttonDownload.download"
+            type="button"
+            @click="download"
+            >DOWNLOAD</a
+          >
+
+          <v-select
+            class="select__toggle--only btn-dropdown--last"
+            v-model="selectedFormat"
+            :options="fileFormats"
+            :clearable="false"
+            :searchable="false"
+            :reduce="format => format.value"
+            @input="download"
+          ></v-select>
+        </div>
         &nbsp; or
         <a class="link" @click="refresh">Upload new file</a>
-      </p>
+      </div>
     </div>
     <div class="content" v-else>
+      <div>
+        <div class="error" v-if="errormsg">
+          <p>{{ errormsg }}</p>
+        </div>
+      </div>
       <vue-dropzone
         id="dropzone"
+        class="row"
         :options="dropOptions"
         :useCustomSlot="true"
         @vdropzone-file-added="addedfile"
       >
-        <div class="dropzone-custom-content">
+        <div class="dropzone-custom-content col-12">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path
               d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"
-            ></path>
+            />
           </svg>
-          <strong>DRAG & DROP</strong>
+          <strong>DRAG &amp; DROP</strong>
           <span>
-            convert .fit or .gpx file(from Garmin, Zwift, Strava ...) to Geojson
-            file
+            convert .fit or .gpx file (from Garmin, Zwift, Strava&hellip;) to
+            Geojson file
           </span>
         </div>
       </vue-dropzone>
+      <div class="row">
+        <div class="col-12">
+          Or import from URL
+          <input
+            class="text-input"
+            type="url"
+            v-model="uploadURL"
+            placeholder="https://your.domain/your-file.gpx"
+          />
+
+          <button class="btn" v-on:click="uploadfile">Upload</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -54,12 +85,17 @@ import { codemirror } from 'vue-codemirror'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/base16-light.css'
 
+import vSelect from 'vue-select'
+
 export default {
   data() {
     return {
       status: 'Select your FIT or GPX file',
       filename: '',
       geojson: '',
+      errormsg: '',
+      uploadURL: '',
+      selectedFormat: 'geojson',
       buttonDownload: {
         href: '',
         download: 'download.geojson'
@@ -68,20 +104,32 @@ export default {
         url: () => '',
         autoDiscover: false,
         autoProcessQueue: false,
+        acceptedFiles: '.gpx,.fit',
         maxFiles: 1
       },
       cmOptions: {
         tabSize: 2,
         theme: 'base16-light',
-        mode: 'text/javascript',
+        mode: 'application/json',
         lineNumbers: true,
         line: true
-      }
+      },
+      fileFormats: [
+        {
+          value: 'geojson',
+          label: 'Geojson'
+        },
+        {
+          value: 'csv',
+          label: 'CSV'
+        }
+      ]
     }
   },
   components: {
     vueDropzone: vueDropzone,
-    codemirror: codemirror
+    codemirror: codemirror,
+    vSelect: vSelect
   },
   methods: {
     get_gpx_data(node, result) {
@@ -296,6 +344,7 @@ export default {
     },
     refresh() {
       this.geojson = ''
+      this.errormsg = ''
     },
     download() {
       var blob = new Blob([this.geojson], { type: 'application/geojson' })
@@ -318,19 +367,33 @@ export default {
       if (extension == 'fit') {
         reader.onloadend = e => this.parseFitFile(e.target.result, reader)
         reader.readAsArrayBuffer(file)
-      }
-      if (extension == 'gpx') {
+      } else if (extension == 'gpx') {
         reader.onloadend = e => this.parseGpxFile(e.target.result, reader)
         reader.readAsText(file)
+      } else {
+        this.status = 'Not a .fit ot .gpx file. Please try uploading again.'
+        this.errormsg = this.status
+        console.log('Invalid file extension')
       }
 
       console.log('STATUS:', reader.readyState) // readyState will be 0
+    },
+    uploadfile() {
+      let proxyUrl = process.env.VUE_APP_PROXY_URL
+      console.log('PROXY:' + proxyUrl)
+      let filename = this.uploadURL.split('/').slice(-1)[0]
+      fetch(proxyUrl + this.uploadURL, { method: 'GET' })
+        .then(response => response.blob())
+        .then(data => new File([data], filename))
+        .then(file => this.addedfile(file))
     }
   }
 }
 </script>
 
 <style lang="scss">
+@import 'vue-select/src/scss/vue-select.scss';
+
 .container {
   width: 100%;
   height: 100%;
@@ -379,16 +442,86 @@ export default {
   }
 }
 
+.text-input {
+  border-radius: 4px;
+  border: solid 1px #ccc;
+  padding: 6px 8px;
+  margin: 0 10px;
+  width: 25%;
+
+  &:focus {
+    border-color: #42b983;
+    outline: 0;
+  }
+}
+
+.btn-download {
+  display: inline-flex;
+
+  .btn {
+    margin: 0;
+  }
+
+  .btn-dropdown--first {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+
+    border-right: 1px solid #fff;
+  }
+
+  .btn-dropdown--last {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+}
+
+.v-select {
+  font-size: 14px;
+  line-height: normal;
+  color: #fff;
+  background-color: #42b983;
+  border-radius: 4px;
+
+  &.select__toggle--only {
+    padding: 0;
+
+    .vs__dropdown-toggle {
+      height: 100%;
+      border: none;
+      width: 100;
+      padding: 8px;
+    }
+
+    .vs__actions {
+      padding: 0;
+    }
+
+    .vs__dropdown-menu {
+      top: calc(-100% - 20px);
+      border: 1px solid rgba(0, 0, 0, 0.25);
+      border-radius: 4px;
+      min-width: initial;
+      width: initial;
+    }
+  }
+
+  .vs__selected-options {
+    display: none;
+  }
+}
+
 .content {
   width: 100%;
-  margin: 50px 50px 100px;
+  margin: 5px 50px 100px;
 }
 
 #dropzone,
 #codemirror {
   width: 100%;
-  height: 100%;
-  margin: 0 auto 40px;
+  height: 85%;
+  margin: 0 auto;
   border-radius: 8px;
 }
 
@@ -441,6 +574,16 @@ export default {
       display: block;
     }
   }
+}
+
+.error {
+  margin: 7px 0;
+  padding: 7px 11px 4px;
+  background: #fce4e4;
+  font-weight: bold;
+  color: #c03;
+  line-height: 20px;
+  border-radius: 8px;
 }
 
 #codemirror {

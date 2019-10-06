@@ -10,8 +10,7 @@ So we started to implement a little web tool to do this work.
 
 ## Submit your changes
 
-If you want to submit a pull request, please send a [GitHub Pull Request to Fit2Geojson](https://github.com/roberto-butti/fit-geojson-vuejs/pull/new/develop) with a clear list of what you've done (read more about [pull requests](http://help.github.com/pull-requests/)).
+If you want to submit a pull request, please send a [GitHub Pull Request to Fit2Geojson](https://github.com/roberto-butti/fit-geojson-vuejs/pull/new/develop) with a clear list of what you've done (read more about [pull requests](https://help.github.com/articles/about-pull-requests)).
 
 
-Please use develop branch for pull request, master branch is only for deploy purpose.
-
+Please use "develop" branch for pull request, "master" branch is only for deploy purpose.

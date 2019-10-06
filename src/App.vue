@@ -50,7 +50,7 @@
 }
 
 .header {
-  padding: 20px;
+  padding: 10px;
   text-align: center;
   position: relative;
   z-index: 1;
@@ -69,7 +69,7 @@
 }
 
 .logo {
-  width: 55px;
+  width: 40px;
   margin: 0;
 }
 
