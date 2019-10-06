@@ -34,14 +34,15 @@ I wrote a tutorial about how to:
 
 ## Requirements
 
-* [Nodejs](https://nodejs.org/)
-* The latest version of [NPM](https://www.npmjs.com/get-npm). Update by `npm install npm@latest -g`
-* [NVM - Node Version Manager](https://github.com/nvm-sh/nvm)
+- [Nodejs](https://nodejs.org/)
+- The latest version of [NPM](https://www.npmjs.com/get-npm). Update by `npm install npm@latest -g`
+- [NVM - Node Version Manager](https://github.com/nvm-sh/nvm)
 
 ## Project setup
 
 ```
 git clone https://github.com/roberto-butti/fit-geojson-vuejs.git
+cd fit-geojson-vuejs
 nvm use
 npm install
 npm run serve
