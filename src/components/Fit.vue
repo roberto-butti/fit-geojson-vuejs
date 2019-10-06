@@ -24,7 +24,8 @@
             :clearable="false"
             :searchable="false"
             :reduce="format => format.value"
-            @input="download">
+            @input="download"
+          >
           </v-select>
         </div>
         &nbsp; or
@@ -92,13 +93,16 @@ export default {
         lineNumbers: true,
         line: true
       },
-      fileFormats: [{
-        value: 'geojson',
-        label: 'Geojson'
-      }, {
-        value: 'csv',
-        label: 'CSV'
-      }]
+      fileFormats: [
+        {
+          value: 'geojson',
+          label: 'Geojson'
+        },
+        {
+          value: 'csv',
+          label: 'CSV'
+        }
+      ]
     }
   },
   components: {
@@ -354,7 +358,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "vue-select/src/scss/vue-select.scss";
+@import 'vue-select/src/scss/vue-select.scss';
 
 .container {
   width: 100%;
