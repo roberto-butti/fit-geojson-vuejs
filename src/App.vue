@@ -50,7 +50,7 @@
 }
 
 .header {
-  padding: 20px;
+  padding: 10px;
   text-align: center;
   position: relative;
   z-index: 1;
