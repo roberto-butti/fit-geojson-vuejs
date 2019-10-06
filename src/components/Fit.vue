@@ -6,18 +6,31 @@
         :options="cmOptions"
         :value="geojson"
       ></codemirror>
-      <p>
-        <a
-          class="btn"
-          v-bind:href="buttonDownload.href"
-          v-bind:download="buttonDownload.download"
-          type="button"
-          @click="download"
-          >DOWNLOAD</a
-        >
+      <div>
+        <div class="btn-download">
+          <a
+            class="btn btn-dropdown--first"
+            v-bind:href="buttonDownload.href"
+            v-bind:download="buttonDownload.download"
+            type="button"
+            @click="download"
+            >DOWNLOAD</a
+          >
+
+          <v-select
+            class="select__toggle--only btn-dropdown--last"
+            v-model="selectedFormat"
+            :options="fileFormats"
+            :clearable="false"
+            :searchable="false"
+            :reduce="format => format.value"
+            @input="download"
+          >
+          </v-select>
+        </div>
         &nbsp; or
         <a class="link" @click="refresh">Upload new file</a>
-      </p>
+      </div>
     </div>
     <div class="content" v-else>
       <div>
@@ -73,6 +86,8 @@ import { codemirror } from 'vue-codemirror'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/base16-light.css'
 
+import vSelect from 'vue-select'
+
 export default {
   data() {
     return {
@@ -81,6 +96,7 @@ export default {
       geojson: '',
       errormsg: '',
       uploadURL: '',
+      selectedFormat: 'geojson',
       buttonDownload: {
         href: '',
         download: 'download.geojson'
@@ -98,12 +114,23 @@ export default {
         mode: 'application/json',
         lineNumbers: true,
         line: true
-      }
+      },
+      fileFormats: [
+        {
+          value: 'geojson',
+          label: 'Geojson'
+        },
+        {
+          value: 'csv',
+          label: 'CSV'
+        }
+      ]
     }
   },
   components: {
     vueDropzone: vueDropzone,
-    codemirror: codemirror
+    codemirror: codemirror,
+    vSelect: vSelect
   },
   methods: {
     get_gpx_data(node, result) {
@@ -366,6 +393,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import 'vue-select/src/scss/vue-select.scss';
+
 .container {
   width: 100%;
   height: 100%;
@@ -424,6 +453,63 @@ export default {
   &:focus {
     border-color: #42b983;
     outline: 0;
+  }
+}
+
+.btn-download {
+  display: inline-flex;
+
+  .btn {
+    margin: 0;
+  }
+
+  .btn-dropdown--first {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+
+    border-right: 1px solid #fff;
+  }
+
+  .btn-dropdown--last {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+}
+
+.v-select {
+  font-size: 14px;
+  line-height: normal;
+  color: #fff;
+  background-color: #42b983;
+  border-radius: 4px;
+
+  &.select__toggle--only {
+    padding: 0;
+
+    .vs__dropdown-toggle {
+      height: 100%;
+      border: none;
+      width: 100;
+      padding: 8px;
+    }
+
+    .vs__actions {
+      padding: 0;
+    }
+
+    .vs__dropdown-menu {
+      top: calc(-100% - 20px);
+      border: 1px solid rgba(0, 0, 0, 0.25);
+      border-radius: 4px;
+      min-width: initial;
+      width: initial;
+    }
+  }
+
+  .vs__selected-options {
+    display: none;
   }
 }
 
