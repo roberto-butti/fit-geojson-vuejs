@@ -520,7 +520,7 @@ export default {
 #dropzone,
 #codemirror {
   width: 100%;
-  height: 100%;
+  height: 85%;
   margin: 0 auto;
   border-radius: 8px;
 }
