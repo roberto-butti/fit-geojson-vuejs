@@ -69,7 +69,7 @@
 }
 
 .logo {
-  width: 55px;
+  width: 40px;
   margin: 0;
 }
 
