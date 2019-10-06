@@ -25,8 +25,7 @@
             :searchable="false"
             :reduce="format => format.value"
             @input="download"
-          >
-          </v-select>
+          ></v-select>
         </div>
         &nbsp; or
         <a class="link" @click="refresh">Upload new file</a>
