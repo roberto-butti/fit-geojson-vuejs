@@ -514,7 +514,7 @@ export default {
 
 .content {
   width: 100%;
-  margin: 50px 50px 100px;
+  margin: 5px 50px 100px;
 }
 
 #dropzone,
