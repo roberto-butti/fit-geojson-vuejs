@@ -47,3 +47,9 @@ nvm use
 npm install
 npm run serve
 ```
+
+# For Contributors
+
+Please read CONTRIBUTING.md file.
+It doesn't matter if you are not a very skilled developers.
+If you have any suggestion on UI design, on Copywriting, your feedback and suggestion as Pull Request are welcomed!!!
