@@ -14,7 +14,7 @@
             v-bind:download="buttonDownload.download"
             type="button"
             @click="download"
-            >DOWNLOAD</a
+            >DOWNLOAD {{ selectedFormat.toUpperCase() }}</a
           >
 
           <v-select
@@ -342,15 +342,50 @@ export default {
         }
       })
     },
+    convert2CSV() {
+      let items = JSON.parse(this.geojson).features
+      const replacer = (key, value) => (value === null ? '' : value)
+      const headers = ['lat', 'long', ...Object.keys(items[0].properties)]
+      items = items.map(el => {
+        for (let i of Object.keys(el.properties)) {
+          el.properties[i] = Array.isArray(el.properties[i])
+            ? el.properties[i].flat().join(',')
+            : el.properties[i]
+        }
+        return {
+          lat: el.geometry.coordinates[0][1],
+          long: el.geometry.coordinates[0][0],
+          ...el.properties
+        }
+      })
+      let csv = items.map(row =>
+        headers
+          .map(fieldName => JSON.stringify(row[fieldName], replacer))
+          .join(',')
+      )
+      csv.unshift(headers.join(','))
+      return csv.join('\r\n')
+    },
     refresh() {
       this.geojson = ''
       this.errormsg = ''
     },
     download() {
-      var blob = new Blob([this.geojson], { type: 'application/geojson' })
-      var url = URL.createObjectURL(blob)
+      var fileName, fileData, mimeType
+      if (this.selectedFormat === 'csv') {
+        fileName = `${this.filename}.csv`
+        fileData = this.convert2CSV()
+        mimeType = 'text/csv'
+      } else {
+        fileName = `${this.filename}.geojson`
+        fileData = this.geojson
+        mimeType = 'application/geojson'
+      }
+
+      const blob = new Blob([fileData], { type: mimeType })
+      const url = URL.createObjectURL(blob)
       this.buttonDownload.href = url
-      this.buttonDownload.download = `${this.filename}.geojson`
+      this.buttonDownload.download = fileName
     },
     addedfile(file) {
       console.log('Added file', file)
