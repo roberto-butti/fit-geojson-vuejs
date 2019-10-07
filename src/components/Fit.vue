@@ -429,7 +429,7 @@ export default {
 
 .content {
   width: 100%;
-  margin: 50px 50px 100px;
+  margin: 5px 50px 100px;
 }
 
 #dropzone,
@@ -441,7 +441,7 @@ export default {
 }
 
 #dropzone {
-  color: #ccc;
+  color: #afafaf;
   border: 2px dashed #ccc;
   display: flex;
   align-items: center;

@@ -83,7 +83,7 @@
 
 .footer {
   width: 100%;
-  margin: 20px 0;
+  margin: 0 0 20px;
   font-size: 12px;
   text-align: center;
 
