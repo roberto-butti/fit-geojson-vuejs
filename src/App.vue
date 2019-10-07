@@ -103,7 +103,6 @@
 
 .footer {
   width: 100%;
-  margin: 0;
   font-size: 12px;
   text-align: center;
 

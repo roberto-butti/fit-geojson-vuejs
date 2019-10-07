@@ -442,7 +442,7 @@ export default {
 
 #dropzone {
   color: #afafaf;
-  border: 2px dashed #ccc;
+  border: 2px dashed #42b983;
   display: flex;
   align-items: center;
   transition: color 0.2s, background 0.2s, border 0.2s;
@@ -460,6 +460,10 @@ export default {
         display: block;
       }
     }
+  }
+
+  &.dz-drag-hover {
+    background: rgba(69, 212, 93, 0.24);
   }
 
   .dz-preview {
