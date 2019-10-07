@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### Added
+
+### Changed
+
+- UI improvement in "Download as" Call To Action (thanks to @mtrunt)
+
 ## v0.1.4
 
 ### Added
