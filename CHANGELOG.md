@@ -2,15 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased v0.1.4]
+## v0.1.4
 
 ### Added
 
 - ChangeLog
+- Export/Download into CSV (thanks to @YasiOnFire) issue #34
 
 ### Changed
 
-- Some aesthetic improvement (footer) (thanks to ShradhaSangtani)
+- Some aesthetic improvement (footer) (thanks to @ShradhaSangtani) issue #54
 
 ## v0.1.3
 
