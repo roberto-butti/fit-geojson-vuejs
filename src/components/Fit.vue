@@ -7,6 +7,7 @@
         :value="geojson"
       ></codemirror>
       <div>
+        Download as
         <div class="btn-download">
           <a
             class="btn btn-dropdown--first"
@@ -14,7 +15,7 @@
             v-bind:download="buttonDownload.download"
             type="button"
             @click="download"
-            >DOWNLOAD {{ selectedFormat.toUpperCase() }}</a
+            >{{ selectedFormat.toUpperCase() }}</a
           >
 
           <v-select
@@ -27,7 +28,7 @@
             @input="download"
           ></v-select>
         </div>
-        &nbsp; or
+        or
         <a class="link" @click="refresh">Upload new file</a>
       </div>
     </div>
@@ -491,6 +492,7 @@ export default {
 }
 
 .btn-download {
+  margin-top: 16px;
   display: inline-flex;
 
   .btn {
@@ -561,8 +563,8 @@ export default {
 }
 
 #dropzone {
-  color: #ccc;
-  border: 2px dashed #ccc;
+  color: #afafaf;
+  border: 2px dashed #42b983;
   display: flex;
   align-items: center;
   transition: color 0.2s, background 0.2s, border 0.2s;
@@ -580,6 +582,10 @@ export default {
         display: block;
       }
     }
+  }
+
+  &.dz-drag-hover {
+    background: rgba(69, 212, 93, 0.24);
   }
 
   .dz-preview {

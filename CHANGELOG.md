@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## v0.1.5
+
+### Added
+
+- Temporary Banner for Hacktoberfest (thanks to @mountainash)
+
+### Changed
+
+- UI improvement in "Download as" Call To Action (thanks to @mtrunt)
+
 ## v0.1.4
 
 ### Added

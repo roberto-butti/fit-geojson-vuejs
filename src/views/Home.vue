@@ -1,5 +1,5 @@
 <template>
-  <FitComponent msg="Welcome to Your Vue.js App" />
+  <FitComponent />
 </template>
 
 <script>
