@@ -41,10 +41,10 @@
             height="145"
           />
           <span class="details">
-            <strong>Roberto Butti presenta fit2geojson</strong> &nbsp;
-            <span class="date">23 ottobre 2019</span>
+            <strong>Roberto Butti presents fit2geojson</strong> &nbsp;
+            <span class="date">23 Oct 2019</span>
             <span class="location">in Roncade Italy</span>
-            <span class="why">for Hacktoberfest 2019</span>
+            <span class="why">for #Hacktoberfest2019</span>
           </span>
         </a>
       </div>
