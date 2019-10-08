@@ -132,10 +132,10 @@
       transform: scale3d(1, 1, 1);
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
-      &:hover {
-        will-change: transform;
-        transform: scale(1.04, 1.04);
-      }
+      //&:hover {
+      //  will-change: transform;
+      //  transform: scale(1.04, 1.04);
+      //}
     }
 
     img {
