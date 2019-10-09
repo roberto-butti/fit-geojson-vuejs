@@ -28,6 +28,10 @@
             @input="download"
           ></v-select>
         </div>
+        <span v-if="extension === 'fit'">
+          or
+          <router-link class="link" to="/charts">see some Charts</router-link>
+        </span>
         or
         <a class="link" @click="refresh">Upload new file</a>
       </div>
@@ -76,6 +80,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import EasyFit from 'easy-fit'
 //import gpxParse from 'gpx-parse'
 
@@ -92,8 +97,6 @@ export default {
   data() {
     return {
       status: 'Select your FIT or GPX file',
-      filename: '',
-      geojson: '',
       errormsg: '',
       uploadURL: '',
       selectedFormat: 'geojson',
@@ -126,6 +129,9 @@ export default {
         }
       ]
     }
+  },
+  computed: {
+    ...mapGetters(['geojson', 'extension', 'filename'])
   },
   components: {
     vueDropzone: vueDropzone,
@@ -256,7 +262,7 @@ export default {
           }
         }
       }
-      this.geojson = JSON.stringify(geo, null, 2)
+      this.$store.commit('geojson', JSON.stringify(geo, null, 2))
     },
     parseGpxFile(result, reader) {
       console.log('STATUS:', reader.readyState) // readyState will be 0
@@ -317,7 +323,7 @@ export default {
           prev_position_lat = element.position_lat
         }
       }
-      this.geojson = JSON.stringify(geo, null, 2)
+      this.$store.commit('geojson', JSON.stringify(geo, null, 2))
     },
     parseFitFile(result, reader) {
       console.log('STATUS:', reader.readyState) // readyState will be 0
@@ -368,7 +374,7 @@ export default {
       return csv.join('\r\n')
     },
     refresh() {
-      this.geojson = ''
+      this.$store.commit('geojson', '')
       this.errormsg = ''
     },
     download() {
@@ -393,17 +399,20 @@ export default {
       const reader = new FileReader()
       console.log('STATUS:', reader.readyState) // readyState will be 0
       console.log('readin', file.size)
-      var extension = file.name
-        .split('.')
-        .pop()
-        .toLowerCase()
+      this.$store.commit(
+        'extension',
+        file.name
+          .split('.')
+          .pop()
+          .toLowerCase()
+      )
 
-      this.filename = file.name.replace('.fit', '')
+      this.$store.commit('filename', file.name.replace('.fit', ''))
       this.status = 'Parsing your FIT file, ' + file.size + ' bytes'
-      if (extension == 'fit') {
+      if (this.extension == 'fit') {
         reader.onloadend = e => this.parseFitFile(e.target.result, reader)
         reader.readAsArrayBuffer(file)
-      } else if (extension == 'gpx') {
+      } else if (this.extension == 'gpx') {
         reader.onloadend = e => this.parseGpxFile(e.target.result, reader)
         reader.readAsText(file)
       } else {
