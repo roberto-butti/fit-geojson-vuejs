@@ -10,7 +10,10 @@ export default new Vuex.Store({
     ).version,
     packageName: JSON.parse(
       unescape(process.env.PACKAGE_JSON || '%7Bversion%3A0%7D')
-    ).name
+    ).name,
+    geojson: '',
+    filename: '',
+    extension: null
   },
   getters: {
     appVersion: state => {
@@ -18,8 +21,15 @@ export default new Vuex.Store({
     },
     appName: state => {
       return state.packageName
-    }
+    },
+    geojson: state => state.geojson,
+    filename: state => state.filename,
+    extension: state => state.extension
   },
-  mutations: {},
+  mutations: {
+    geojson: (state, payload) => (state.geojson = payload),
+    filename: (state, payload) => (state.filename = payload),
+    extension: (state, payload) => (state.extension = payload)
+  },
   actions: {}
 })
