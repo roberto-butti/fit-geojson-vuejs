@@ -5,6 +5,7 @@
 ### Added
 
 - Charts of FIT file (thanks to @YasiOnFire) issue #2
+- GitHub action for continuous integration (thanks to @) issue #
 
 ### Changed
 
