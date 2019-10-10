@@ -1,6 +1,12 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
+## [ unreleased v0.1.6]
+
+### Added
+
+- Charts of FIT file (thanks to @YasiOnFire) issue #2
+
+### Changed
 
 ## v0.1.5
 
