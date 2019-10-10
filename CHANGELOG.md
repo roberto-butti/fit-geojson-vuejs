@@ -1,6 +1,12 @@
 # Change Log
 
-## [ unreleased v0.1.6]
+## [ unreleased v0.1.7]
+
+### Added
+
+### Changed
+
+## v0.1.6
 
 ### Added
 
