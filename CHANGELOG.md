@@ -6,12 +6,14 @@
 
 ### Changed
 
+- Some aesthetics things on Dropzone (thanks to @Anubhav007)
+
 ## v0.1.6
 
 ### Added
 
 - Charts of FIT file (thanks to @YasiOnFire) issue #2
-- GitHub action for continuous integration (thanks to @) issue #
+- GitHub action for continuous integration (thanks to @philipmckenna) issue #
 
 ### Changed
 
