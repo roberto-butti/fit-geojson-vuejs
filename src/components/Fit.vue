@@ -564,7 +564,7 @@ export default {
 }
 
 #dropzone {
-  color: #afafaf;
+  color: #494e47;
   border: 1px solid #42b983;
   display: flex;
   align-items: center;
