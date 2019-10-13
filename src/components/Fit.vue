@@ -573,7 +573,7 @@ export default {
 
 #dropzone {
   color: #afafaf;
-  border: 2px dashed #42b983;
+  border: 1px solid #42b983;
   display: flex;
   align-items: center;
   transition: color 0.2s, background 0.2s, border 0.2s;
@@ -644,5 +644,11 @@ export default {
   .CodeMirror {
     height: 100%;
   }
+}
+
+.dropzone {
+  min-height: 150px;
+  background: #e3f5e4;
+  padding: 20px 20px;
 }
 </style>
