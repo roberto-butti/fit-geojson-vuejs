@@ -564,7 +564,7 @@ export default {
 
 #dropzone {
   color: #afafaf;
-  border: 1px solid #6f8c90;
+  border: 1px solid #42b983;
   display: flex;
   align-items: center;
   transition: color 0.2s, background 0.2s, border 0.2s;
@@ -639,7 +639,7 @@ export default {
 
 .dropzone {
   min-height: 150px;
-  background: #e3e9f1;
+  background: #e3f5e4;
   padding: 20px 20px;
 }
 </style>
