@@ -34,17 +34,18 @@ export default {
         styleGroups: {
           style: [
             { zIndex: 1, type: 'Line', strokeWidth: 2, stroke: '#DD8811' },
-            { zIndex: 0, type: 'Line', strokeWidth: 4, stroke: '#F0F0F0' },
-            {
-              zIndex: 2,
-              type: 'Text',
-              fill: '#000000',
-              textRef: 'properties.name'
-            }
+            { zIndex: 0, type: 'Line', strokeWidth: 4, stroke: '#F0F0F0' }
+          ],
+          styleHigh: [
+            { zIndex: 1, type: 'Line', strokeWidth: 2, stroke: '#FF0000' },
+            { zIndex: 0, type: 'Line', strokeWidth: 4, stroke: '#F0F0F0' }
           ]
         },
         assign: function(feature) {
           //console.log(feature)
+          if (feature.properties.hr && feature.properties.hr > 130) {
+            return 'styleHigh'
+          }
           return 'style'
         }
       }
