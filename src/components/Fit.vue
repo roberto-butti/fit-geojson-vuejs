@@ -33,6 +33,7 @@
           <router-link class="link" to="/charts">see some Charts</router-link>
         </span>
         or
+        <router-link class="link" to="/map">see data on Map</router-link>or
         <a class="link" @click="refresh">Upload new file</a>
       </div>
     </div>
