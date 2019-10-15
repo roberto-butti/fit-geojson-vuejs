@@ -1,8 +1,16 @@
 # Change Log
 
-## [ unreleased v0.1.7]
+## [ unreleased v0.1.8]
 
 ### Added
+
+### Changed
+
+## v0.1.7
+
+### Added
+
+- Adding XYZ Map Renderer for displaying the new Geojson file
 
 ### Changed
 
