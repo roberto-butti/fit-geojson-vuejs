@@ -32,6 +32,10 @@
           or
           <router-link class="link" to="/charts">see some Charts</router-link>
         </span>
+        <span>
+          or
+          <router-link class="link" to="/map">see data on Map</router-link>
+        </span>
         or
         <a class="link" @click="refresh">Upload new file</a>
       </div>
@@ -572,11 +576,14 @@ export default {
 }
 
 #dropzone {
-  color: #afafaf;
-  border: 2px dashed #42b983;
+  color: #494e47;
+  border: 1px solid #42b983;
   display: flex;
   align-items: center;
   transition: color 0.2s, background 0.2s, border 0.2s;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   &.dz-started {
     .dz-message {
