@@ -4,6 +4,8 @@
 
 ### Added
 
+- Adding Contributors page (thanks to @andersonmendess)
+
 ### Changed
 
 ## v0.1.7
