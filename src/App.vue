@@ -22,6 +22,8 @@
         <a href="https://github.com/roberto-butti">@roberto-butti</a>,
         <a href="https://github.com/LucaDb">@LucaDb</a>,
         <a href="https://github.com/soloistco">@soloistco</a>
+        <br />Thanks to the
+        <router-link to="/contributors">Contributors</router-link>
       </p>
       <p>
         {{ $store.getters.appName }} v.{{ $store.getters.appVersion }}

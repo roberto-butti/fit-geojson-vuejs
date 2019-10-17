@@ -10,6 +10,7 @@
         </a>
       </div>
     </div>
+    <a href="/">Back to HOME</a>
   </div>
 </template>
 
