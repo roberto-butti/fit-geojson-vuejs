@@ -58,12 +58,31 @@ export default {
   computed: {
     distance() {
       return JSON.parse(this.geojson).features.map(el => {
+        if (el.properties.time) {
+          return el.properties.time
+        }
         return el.properties.timestamp
       })
     },
     parsedData() {
       let features = JSON.parse(this.geojson).features
       let output = []
+      if (features[0].properties.cad) {
+        output.push({
+          name: 'gpxcadence',
+          data: features.map(el => {
+            return el.properties.cad
+          })
+        })
+      }
+      if (features[0].properties.ele) {
+        output.push({
+          name: 'gpxelevation',
+          data: features.map(el => {
+            return el.properties.ele
+          })
+        })
+      }
       if (features[0].properties.speed) {
         output.push({
           name: 'speed',
@@ -93,8 +112,8 @@ export default {
     ...mapGetters(['geojson', 'extension'])
   },
   mounted() {
-    if (!this.geojson || this.geojson.trim() === '' || this.extension !== 'fit')
-      this.$router.push('/')
+    console.log(this.geojson)
+    if (!this.geojson || this.geojson.trim() === '') this.$router.push('/')
   }
 }
 </script>

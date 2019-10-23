@@ -28,7 +28,7 @@
             @input="download"
           ></v-select>
         </div>
-        <span v-if="extension === 'fit'">
+        <span>
           or
           <router-link class="link" to="/charts">see some Charts</router-link>
         </span>
