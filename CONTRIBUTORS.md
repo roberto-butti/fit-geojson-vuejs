@@ -5,7 +5,7 @@
 			<a href="https://github.com/roberto-butti">
 			<img src="https://avatars1.githubusercontent.com/u/678434?v=4" width="100px;" alt="roberto-butti" /><br />
 			<sup><b>roberto-butti</b></sup></a><br />
-			<sup>Contributions: 93</sup>
+			<sup>Contributions: 103</sup>
 			</td><td align="center" valign="top">
 			<a href="https://github.com/ShradhaSangtani">
 			<img src="https://avatars3.githubusercontent.com/u/14348823?v=4" width="100px;" alt="ShradhaSangtani" /><br />
@@ -41,6 +41,11 @@
 			<a href="https://github.com/andersonmendess">
 			<img src="https://avatars0.githubusercontent.com/u/22031302?v=4" width="100px;" alt="andersonmendess" /><br />
 			<sup><b>andersonmendess</b></sup></a><br />
+			<sup>Contributions: 1</sup>
+			</td><td align="center" valign="top">
+			<a href="https://github.com/Fabryz">
+			<img src="https://avatars1.githubusercontent.com/u/17748?v=4" width="100px;" alt="Fabryz" /><br />
+			<sup><b>Fabryz</b></sup></a><br />
 			<sup>Contributions: 1</sup>
 			</td><td align="center" valign="top">
 			<a href="https://github.com/fvianello">
