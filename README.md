@@ -45,8 +45,18 @@ git clone https://github.com/roberto-butti/fit-geojson-vuejs.git
 cd fit-geojson-vuejs
 nvm use
 npm install
+cp .env.dist .env
+```
+
+Don't forget to **specify your environments variables** in the `.env` file then **start the app** with:
+```
 npm run serve
 ```
+
+#### Environments variables:
+- `VUE_APP_PROXY_URL` must contain your proxy url, if you own one
+- `VUE_APP_ACCESS_TOKEN` must contain the token used by the here.xyz APIs (to get one: https://www.here.xyz/api/getting-token/)
+- `VUE_APP_GOOGLE_CODE` permit you to certifie that you are the owner of this website (more infos: https://support.google.com/webmasters/answer/9008080?hl=en)
 
 # For Contributors
 
