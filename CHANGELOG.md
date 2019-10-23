@@ -1,12 +1,22 @@
 # Change Log
 
-## [ unreleased v0.1.8]
+## [ v0.2.0]
 
 ### Added
 
 - Adding Contributors page (thanks to @andersonmendess)
+- Add sitemap.xml (thanks to @eduardosgs and @Fabryz)
+- new script for auto generation of contributors.md (thanks to @gcoro)
+- google site verification (thanks to @andrea-giachetto)
+- ignoring .env file in .gitignore
+  (thanks to @Vhndaree)
 
 ### Changed
+
+- Fix a type in a Meta Tag (thanks to @fvianello)
+- new logo! (thanks to @exodusanto)
+- improving install Documentation (thanks to @Theo-Dgl)
+- removing Hacktoberfest banner, the party was on 22th October (thanks to @Theo-Dgl)
 
 ## v0.1.7
 
