@@ -83,6 +83,14 @@ export default {
           })
         })
       }
+      if (features[0].properties.hr) {
+        output.push({
+          name: 'gpxhr',
+          data: features.map(el => {
+            return el.properties.hr
+          })
+        })
+      }
       if (features[0].properties.speed) {
         output.push({
           name: 'speed',
