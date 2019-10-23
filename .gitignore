@@ -5,6 +5,7 @@ node_modules
 /download.json
 
 # local env files
+.env
 .env.local
 .env.*.local
 
