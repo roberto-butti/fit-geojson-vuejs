@@ -81,7 +81,7 @@ export default {
     )
     var Features = JSON.parse(this.geojson)
     pointLayer.addFeature(Features)
-    console.log(Features.features[0].geometry.coordinates[0])
+    //console.log(Features.features[0].geometry.coordinates[0])
     this.display.setCenter(Features.features[0].geometry.coordinates[0])
     this.display.setZoomlevel(14)
   }

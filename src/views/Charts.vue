@@ -120,7 +120,7 @@ export default {
     ...mapGetters(['geojson', 'extension'])
   },
   mounted() {
-    console.log(this.geojson)
+    //console.log(this.geojson)
     if (!this.geojson || this.geojson.trim() === '') this.$router.push('/')
   }
 }
