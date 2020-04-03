@@ -15,19 +15,12 @@
 </template>
 
 <script>
+import users from '../../public/contributors.json';
 export default {
   name: 'Contributors',
   data: () => ({
-    users: []
-  }),
-  mounted: async function() {
-    const res = await fetch(
-      'https://api.github.com/repos/roberto-butti/fit-geojson-vuejs/contributors'
-    )
-    const resJson = await res.json()
-
-    this.users = resJson.filter(user => user['type'] === 'User')
-  }
+    users
+  })
 }
 </script>
 

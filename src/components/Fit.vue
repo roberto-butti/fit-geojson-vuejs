@@ -28,7 +28,7 @@
             @input="download"
           ></v-select>
         </div>
-        <span v-if="extension === 'fit'">
+        <span>
           or
           <router-link class="link" to="/charts">see some Charts</router-link>
         </span>
@@ -148,7 +148,7 @@ export default {
 
       switch (node.nodeName) {
         case 'name':
-          console.log(node.nodeName + ' = ' + node.textContent)
+          //console.log(node.nodeName + ' = ' + node.textContent)
           result.name = node.textContent
 
           break
@@ -227,7 +227,7 @@ export default {
     },
 
     transformGpxData(data) {
-      console.log(data)
+      //console.log(data)
       let geo = {}
       geo.type = 'FeatureCollection'
       geo.features = []
@@ -268,30 +268,19 @@ export default {
       }
       this.$store.commit('geojson', JSON.stringify(geo, null, 2))
     },
-    parseGpxFile(result, reader) {
-      console.log('STATUS:', reader.readyState) // readyState will be 0
+    parseGpxFile(result /*, reader*/) {
+      //console.log('STATUS:', reader.readyState) // readyState will be 0
       //console.log(result)
       var xml = new window.DOMParser().parseFromString(result, 'text/xml')
-      console.log(xml)
+      //console.log(xml)
       if (xml) {
         var objGpx = this.get_gpx_data(xml.documentElement)
         this.status = 'Loaded DATA!!!'
-        console.log(objGpx)
+        //console.log(objGpx)
         this.transformGpxData(objGpx)
       } else {
         this.status = 'Error parsing GPX'
       }
-      /*
-      gpxParse.parseGpx(result, function(error, data) {
-        if (error) {
-          console.log(error)
-          this.status = 'Error !!!' + error
-        } else {
-          this.status = 'Loaded DATA!!!'
-          this.transformGpxData(data)
-        }
-      })
-      */
     },
     transformFitData(data) {
       //console.log(data)
@@ -329,9 +318,9 @@ export default {
       }
       this.$store.commit('geojson', JSON.stringify(geo, null, 2))
     },
-    parseFitFile(result, reader) {
-      console.log('STATUS:', reader.readyState) // readyState will be 0
-      console.log(result)
+    parseFitFile(result /*, reader */) {
+      //console.log('STATUS:', reader.readyState) // readyState will be 0
+      //console.log(result)
       // For documentation: https://github.com/pierremtb/easy-fit#new-easyfitobject-options
       var easyFit = new EasyFit({
         force: true,
@@ -345,7 +334,7 @@ export default {
       easyFit.parse(result, (error, data) => {
         // Handle result of parse method
         if (error) {
-          console.log(error)
+          //console.log(error)
           this.status = 'Error !!!' + error
         } else {
           this.status = 'Loaded DATA!!!'
@@ -399,10 +388,10 @@ export default {
       this.buttonDownload.download = fileName
     },
     addedfile(file) {
-      console.log('Added file', file)
+      //console.log('Added file', file)
       const reader = new FileReader()
-      console.log('STATUS:', reader.readyState) // readyState will be 0
-      console.log('readin', file.size)
+      //console.log('STATUS:', reader.readyState) // readyState will be 0
+      //console.log('readin', file.size)
       this.$store.commit(
         'extension',
         file.name
@@ -414,22 +403,22 @@ export default {
       this.$store.commit('filename', file.name.replace('.fit', ''))
       this.status = 'Parsing your FIT file, ' + file.size + ' bytes'
       if (this.extension == 'fit') {
-        reader.onloadend = e => this.parseFitFile(e.target.result, reader)
+        reader.onloadend = e => this.parseFitFile(e.target.result /*, reader*/)
         reader.readAsArrayBuffer(file)
       } else if (this.extension == 'gpx') {
-        reader.onloadend = e => this.parseGpxFile(e.target.result, reader)
+        reader.onloadend = e => this.parseGpxFile(e.target.result /*, reader*/)
         reader.readAsText(file)
       } else {
         this.status = 'Not a .fit ot .gpx file. Please try uploading again.'
         this.errormsg = this.status
-        console.log('Invalid file extension')
+        //console.log('Invalid file extension')
       }
 
-      console.log('STATUS:', reader.readyState) // readyState will be 0
+      //console.log('STATUS:', reader.readyState) // readyState will be 0
     },
     uploadfile() {
       let proxyUrl = process.env.VUE_APP_PROXY_URL
-      console.log('PROXY:' + proxyUrl)
+      //console.log('PROXY:' + proxyUrl)
       let filename = this.uploadURL.split('/').slice(-1)[0]
       fetch(proxyUrl + this.uploadURL, { method: 'GET' })
         .then(response => response.blob())
