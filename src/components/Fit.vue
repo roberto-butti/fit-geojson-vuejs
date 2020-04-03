@@ -268,7 +268,7 @@ export default {
       }
       this.$store.commit('geojson', JSON.stringify(geo, null, 2))
     },
-    parseGpxFile(result, reader) {
+    parseGpxFile(result /*, reader*/) {
       //console.log('STATUS:', reader.readyState) // readyState will be 0
       //console.log(result)
       var xml = new window.DOMParser().parseFromString(result, 'text/xml')
