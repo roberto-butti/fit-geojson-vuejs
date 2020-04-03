@@ -414,7 +414,7 @@ export default {
         //console.log('Invalid file extension')
       }
 
-      console.log('STATUS:', reader.readyState) // readyState will be 0
+      //console.log('STATUS:', reader.readyState) // readyState will be 0
     },
     uploadfile() {
       let proxyUrl = process.env.VUE_APP_PROXY_URL
