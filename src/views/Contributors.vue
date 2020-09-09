@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import users from '../../public/contributors.json';
+import users from '../../public/contributors.json'
 export default {
   name: 'Contributors',
   data: () => ({
