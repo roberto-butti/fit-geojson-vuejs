@@ -13,23 +13,23 @@ export default new Vuex.Store({
     ).name,
     geojson: '',
     filename: '',
-    extension: null
+    extension: null,
   },
   getters: {
-    appVersion: state => {
+    appVersion: (state) => {
       return state.packageVersion
     },
-    appName: state => {
+    appName: (state) => {
       return state.packageName
     },
-    geojson: state => state.geojson,
-    filename: state => state.filename,
-    extension: state => state.extension
+    geojson: (state) => state.geojson,
+    filename: (state) => state.filename,
+    extension: (state) => state.extension,
   },
   mutations: {
     geojson: (state, payload) => (state.geojson = payload),
     filename: (state, payload) => (state.filename = payload),
-    extension: (state, payload) => (state.extension = payload)
+    extension: (state, payload) => (state.extension = payload),
   },
-  actions: {}
+  actions: {},
 })
