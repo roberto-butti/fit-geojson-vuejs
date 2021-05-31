@@ -1,5 +1,12 @@
 # Change Log
 
+## [ v0.2.2]
+### Update
+- Update npm packages.
+- update Node lts/fermium
+- Fix style with latest prettier configuration
+- update URL for mvt tiles (map)
+
 ## [ v0.2.1]
 ### Update
 - Update npm packages.
