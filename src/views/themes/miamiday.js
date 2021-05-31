@@ -3,7 +3,7 @@ const miamiday = {
 
   backgroundColor: '#F4F7F9',
 
-  strokeWidthZoomScale: function(level) {
+  strokeWidthZoomScale: function (level) {
     return level > 17 ? 1 : level > 14 ? 0.5 : 0.25
   },
 
@@ -12,16 +12,16 @@ const miamiday = {
       {
         zIndex: 200,
         type: 'Polygon',
-        fill: '#98C9E5'
-      }
+        fill: '#98C9E5',
+      },
     ],
 
     earth: [
       {
         zIndex: 1,
         type: 'Polygon',
-        fill: '#F4F7F9'
-      }
+        fill: '#F4F7F9',
+      },
     ],
 
     countryBoundary: [
@@ -29,8 +29,8 @@ const miamiday = {
         zIndex: 262,
         type: 'Line',
         strokeWidth: 5,
-        stroke: '#D6CDC1'
-      }
+        stroke: '#D6CDC1',
+      },
     ],
 
     countryBoundaryZ4: [
@@ -38,8 +38,8 @@ const miamiday = {
         zIndex: 262,
         type: 'Line',
         strokeWidth: 8,
-        stroke: '#D6CDC1'
-      }
+        stroke: '#D6CDC1',
+      },
     ],
 
     countryBoundaryZ6: [
@@ -47,8 +47,8 @@ const miamiday = {
         zIndex: 262,
         type: 'Line',
         strokeWidth: 10,
-        stroke: '#D6CDC1'
-      }
+        stroke: '#D6CDC1',
+      },
     ],
 
     countryBoundaryZ9: [
@@ -56,8 +56,8 @@ const miamiday = {
         zIndex: 262,
         type: 'Line',
         strokeWidth: 14,
-        stroke: '#D6CDC1'
-      }
+        stroke: '#D6CDC1',
+      },
     ],
 
     dashed_boundary: [
@@ -66,8 +66,8 @@ const miamiday = {
         type: 'Line',
         strokeWidth: 5,
         stroke: '#D6CDC1',
-        strokeDasharray: [3, 4]
-      }
+        strokeDasharray: [3, 4],
+      },
     ],
 
     regionBoundary: [
@@ -76,8 +76,8 @@ const miamiday = {
         type: 'Line',
         strokeWidth: 4,
         stroke: '#D9C9B4',
-        opacity: 0.5
-      }
+        opacity: 0.5,
+      },
     ],
 
     nationalForest: [
@@ -85,8 +85,8 @@ const miamiday = {
         zIndex: 31,
         type: 'Polygon',
         fill: '#AFE0A4',
-        opacity: 0.65
-      }
+        opacity: 0.65,
+      },
     ],
 
     nationalPark: [
@@ -94,8 +94,8 @@ const miamiday = {
         zIndex: 18,
         type: 'Polygon',
         fill: '#C1F0B6',
-        opacity: 0.75
-      }
+        opacity: 0.75,
+      },
     ],
 
     park: [
@@ -103,8 +103,8 @@ const miamiday = {
         zIndex: 24,
         type: 'Polygon',
         fill: '#C7EDA8',
-        opacity: 0.85
-      }
+        opacity: 0.85,
+      },
     ],
 
     beach: [
@@ -112,8 +112,8 @@ const miamiday = {
         zIndex: 95,
         type: 'Polygon',
         fill: '#FCFADE',
-        opacity: 0.75
-      }
+        opacity: 0.75,
+      },
     ],
 
     glacier: [
@@ -121,8 +121,8 @@ const miamiday = {
         zIndex: 29,
         type: 'Polygon',
         fill: '#E8F2FF',
-        opacity: 0.85
-      }
+        opacity: 0.85,
+      },
     ],
 
     golfCourse: [
@@ -130,8 +130,8 @@ const miamiday = {
         zIndex: 56,
         type: 'Polygon',
         fill: '#B5E8B6',
-        opacity: 0.85
-      }
+        opacity: 0.85,
+      },
     ],
 
     university: [
@@ -139,8 +139,8 @@ const miamiday = {
         zIndex: 39,
         type: 'Polygon',
         fill: '#EBE6DD',
-        opacity: 0.45
-      }
+        opacity: 0.45,
+      },
     ],
 
     hospital: [
@@ -148,8 +148,8 @@ const miamiday = {
         zIndex: 54,
         type: 'Polygon',
         fill: '#FFF5F9',
-        opacity: 0.75
-      }
+        opacity: 0.75,
+      },
     ],
 
     builtup: [
@@ -157,8 +157,8 @@ const miamiday = {
         zIndex: 21,
         type: 'Polygon',
         fill: '#E1EAF0',
-        opacity: 0.75
-      }
+        opacity: 0.75,
+      },
     ],
 
     military: [
@@ -166,16 +166,16 @@ const miamiday = {
         zIndex: 45,
         type: 'Polygon',
         fill: '#EBEDF2',
-        opacity: 0.75
-      }
+        opacity: 0.75,
+      },
     ],
 
     runway: [
       {
         zIndex: 65,
         type: 'Polygon',
-        fill: '#E1F2F1'
-      }
+        fill: '#E1F2F1',
+      },
     ],
 
     motorway: [
@@ -183,8 +183,8 @@ const miamiday = {
         zIndex: 383,
         type: 'Line',
         strokeWidth: 3,
-        stroke: '#BFBAB8'
-      }
+        stroke: '#BFBAB8',
+      },
     ],
 
     motorwayZ11: [
@@ -192,8 +192,8 @@ const miamiday = {
         zIndex: 383,
         type: 'Line',
         strokeWidth: 6,
-        stroke: '#B7B2AF'
-      }
+        stroke: '#B7B2AF',
+      },
     ],
 
     motorwayZ14: [
@@ -201,8 +201,8 @@ const miamiday = {
         zIndex: 383,
         type: 'Line',
         strokeWidth: 11,
-        stroke: '#B7B2AF'
-      }
+        stroke: '#B7B2AF',
+      },
     ],
 
     motorwayZ17: [
@@ -210,8 +210,8 @@ const miamiday = {
         zIndex: 383,
         type: 'Line',
         strokeWidth: 16,
-        stroke: '#B7B2AF'
-      }
+        stroke: '#B7B2AF',
+      },
     ],
 
     trunkRoads: [
@@ -219,8 +219,8 @@ const miamiday = {
         zIndex: 381,
         type: 'Line',
         strokeWidth: 3,
-        stroke: '#BFBAB8'
-      }
+        stroke: '#BFBAB8',
+      },
     ],
 
     trunkRoadsZ11: [
@@ -228,8 +228,8 @@ const miamiday = {
         zIndex: 381,
         type: 'Line',
         strokeWidth: 6,
-        stroke: '#B7B2AF'
-      }
+        stroke: '#B7B2AF',
+      },
     ],
 
     trunkRoadsZ14: [
@@ -237,8 +237,8 @@ const miamiday = {
         zIndex: 381,
         type: 'Line',
         strokeWidth: 11,
-        stroke: '#B7B2AF'
-      }
+        stroke: '#B7B2AF',
+      },
     ],
 
     trunkRoadsZ17: [
@@ -246,8 +246,8 @@ const miamiday = {
         zIndex: 381,
         type: 'Line',
         strokeWidth: 16,
-        stroke: '#B7B2AF'
-      }
+        stroke: '#B7B2AF',
+      },
     ],
 
     primaryRoads: [
@@ -255,8 +255,8 @@ const miamiday = {
         zIndex: 380,
         type: 'Line',
         strokeWidth: 1,
-        stroke: '#D1CCC9'
-      }
+        stroke: '#D1CCC9',
+      },
     ],
 
     primaryRoadsZ9: [
@@ -264,8 +264,8 @@ const miamiday = {
         zIndex: 380,
         type: 'Line',
         strokeWidth: 3,
-        stroke: '#D1CCC9'
-      }
+        stroke: '#D1CCC9',
+      },
     ],
 
     primaryRoadsZ12: [
@@ -273,8 +273,8 @@ const miamiday = {
         zIndex: 380,
         type: 'Line',
         strokeWidth: 6,
-        stroke: '#C2BDBA'
-      }
+        stroke: '#C2BDBA',
+      },
     ],
 
     primaryRoadsZ14: [
@@ -282,8 +282,8 @@ const miamiday = {
         zIndex: 380,
         type: 'Line',
         strokeWidth: 7,
-        stroke: '#B7B2AF'
-      }
+        stroke: '#B7B2AF',
+      },
     ],
 
     primaryRoadsZ17: [
@@ -291,8 +291,8 @@ const miamiday = {
         zIndex: 380,
         type: 'Line',
         strokeWidth: 8,
-        stroke: '#B7B2AF'
-      }
+        stroke: '#B7B2AF',
+      },
     ],
 
     secondaryRoads: [
@@ -300,8 +300,8 @@ const miamiday = {
         zIndex: 379,
         type: 'Line',
         strokeWidth: 2,
-        stroke: '#C7C2BF'
-      }
+        stroke: '#C7C2BF',
+      },
     ],
 
     secondaryRoadsZ12: [
@@ -309,8 +309,8 @@ const miamiday = {
         zIndex: 379,
         type: 'Line',
         strokeWidth: 5,
-        stroke: '#C7C2BF'
-      }
+        stroke: '#C7C2BF',
+      },
     ],
 
     secondaryRoadsZ14: [
@@ -318,8 +318,8 @@ const miamiday = {
         zIndex: 379,
         type: 'Line',
         strokeWidth: 6,
-        stroke: '#B7B2AF'
-      }
+        stroke: '#B7B2AF',
+      },
     ],
 
     highway: [
@@ -327,8 +327,8 @@ const miamiday = {
         zIndex: 443,
         type: 'Line',
         strokeWidth: 2,
-        stroke: '#B7B2AF'
-      }
+        stroke: '#B7B2AF',
+      },
     ],
 
     highwayZ14: [
@@ -336,8 +336,8 @@ const miamiday = {
         zIndex: 443,
         type: 'Line',
         strokeWidth: 2,
-        stroke: '#B7B2AF'
-      }
+        stroke: '#B7B2AF',
+      },
     ],
 
     tertiary: [
@@ -345,8 +345,8 @@ const miamiday = {
         zIndex: 377,
         type: 'Line',
         strokeWidth: 3,
-        stroke: '#CCC8C6'
-      }
+        stroke: '#CCC8C6',
+      },
     ],
 
     tertiaryZ13: [
@@ -354,8 +354,8 @@ const miamiday = {
         zIndex: 377,
         type: 'Line',
         strokeWidth: 5,
-        stroke: '#CCC8C6'
-      }
+        stroke: '#CCC8C6',
+      },
     ],
 
     tertiaryZ14: [
@@ -363,8 +363,8 @@ const miamiday = {
         zIndex: 377,
         type: 'Line',
         strokeWidth: 4,
-        stroke: '#B7B2AF'
-      }
+        stroke: '#B7B2AF',
+      },
     ],
 
     minorRoads: [
@@ -372,8 +372,8 @@ const miamiday = {
         zIndex: 360,
         type: 'Line',
         strokeWidth: 1,
-        stroke: '#BDB7B5'
-      }
+        stroke: '#BDB7B5',
+      },
     ],
 
     minorRoadsZ14: [
@@ -381,8 +381,8 @@ const miamiday = {
         zIndex: 360,
         type: 'Line',
         strokeWidth: 2,
-        stroke: '#BDB7B5'
-      }
+        stroke: '#BDB7B5',
+      },
     ],
 
     minorRoadsZ17: [
@@ -390,8 +390,8 @@ const miamiday = {
         zIndex: 360,
         type: 'Line',
         strokeWidth: 2,
-        stroke: '#B7B2AF'
-      }
+        stroke: '#B7B2AF',
+      },
     ],
 
     pathRoads: [
@@ -399,16 +399,16 @@ const miamiday = {
         zIndex: 354,
         type: 'Line',
         strokeWidth: 2,
-        stroke: '#DBD6D3'
-      }
+        stroke: '#DBD6D3',
+      },
     ],
 
     buildings: [
       {
         zIndex: 475,
         type: 'Polygon',
-        fill: '#EDF3F5'
-      }
+        fill: '#EDF3F5',
+      },
     ],
 
     buildingsZ16: [
@@ -416,13 +416,13 @@ const miamiday = {
         zIndex: 475,
         type: 'Line',
         strokeWidth: 2,
-        stroke: '#CED6D9'
+        stroke: '#CED6D9',
       },
       {
         zIndex: 475,
         type: 'Polygon',
-        fill: '#EDF3F5'
-      }
+        fill: '#EDF3F5',
+      },
     ],
 
     hospitalBuilding: [
@@ -430,36 +430,36 @@ const miamiday = {
         zIndex: 475,
         type: 'Polygon',
         fill: '#FCE1EB',
-        opacity: 0.75
-      }
+        opacity: 0.75,
+      },
     ],
 
     universityBuilding: [
       {
         zIndex: 475,
         type: 'Polygon',
-        fill: '#F5EEC4'
-      }
+        fill: '#F5EEC4',
+      },
     ],
 
     sportsBuilding: [
       {
         zIndex: 475,
         type: 'Polygon',
-        fill: '#F2CAB1'
-      }
+        fill: '#F2CAB1',
+      },
     ],
 
     artsBuilding: [
       {
         zIndex: 475,
         type: 'Polygon',
-        fill: '#D0CEED'
-      }
-    ]
+        fill: '#D0CEED',
+      },
+    ],
   },
 
-  assign: function(feature, level) {
+  assign: function (feature, level) {
     var props = feature.properties
     var kind = props.kind
     var layer = props.layer
@@ -668,7 +668,7 @@ const miamiday = {
       }
       return 'buildings'
     }
-  }
+  },
 }
 
 export default miamiday

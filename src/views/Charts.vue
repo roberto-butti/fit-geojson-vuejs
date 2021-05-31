@@ -9,42 +9,42 @@
           type: 'datetime',
           categories: distance,
           axisBorder: {
-            show: false
+            show: false,
           },
           axisTicks: {
-            show: false
+            show: false,
           },
           labels: {
-            show: false
-          }
+            show: false,
+          },
         },
         grid: {
-          show: false
+          show: false,
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         chart: {
           type: 'area',
           stacked: true,
           animations: {
-            enabled: false
+            enabled: false,
           },
           zoom: {
-            enabled: true
-          }
+            enabled: true,
+          },
         },
         storke: {
           width: 0.4,
           curve: 'smooth',
-          lineCap: 'round'
+          lineCap: 'round',
         },
         tooltip: {
           x: {
             show: true,
-            format: 'H:mm:ss'
-          }
-        }
+            format: 'H:mm:ss',
+          },
+        },
       }"
       :series="parsedData"
     ></apexchart>
@@ -57,7 +57,7 @@ export default {
   name: 'Charts',
   computed: {
     distance() {
-      return JSON.parse(this.geojson).features.map(el => {
+      return JSON.parse(this.geojson).features.map((el) => {
         if (el.properties.time) {
           return el.properties.time
         }
@@ -70,59 +70,59 @@ export default {
       if (features[0].properties.cad) {
         output.push({
           name: 'gpxcadence',
-          data: features.map(el => {
+          data: features.map((el) => {
             return el.properties.cad
-          })
+          }),
         })
       }
       if (features[0].properties.ele) {
         output.push({
           name: 'gpxelevation',
-          data: features.map(el => {
+          data: features.map((el) => {
             return el.properties.ele
-          })
+          }),
         })
       }
       if (features[0].properties.hr) {
         output.push({
           name: 'gpxhr',
-          data: features.map(el => {
+          data: features.map((el) => {
             return el.properties.hr
-          })
+          }),
         })
       }
       if (features[0].properties.speed) {
         output.push({
           name: 'speed',
-          data: features.map(el => {
+          data: features.map((el) => {
             return el.properties.speed.toFixed(2)
-          })
+          }),
         })
       }
       if (features[0].properties.cadence) {
         output.push({
           name: 'cadence',
-          data: features.map(el => {
+          data: features.map((el) => {
             return el.properties.cadence
-          })
+          }),
         })
       }
       if (features[0].properties.heart_rate) {
         output.push({
           name: 'heart rate',
-          data: features.map(el => {
+          data: features.map((el) => {
             return el.properties.heart_rate
-          })
+          }),
         })
       }
       return output
     },
-    ...mapGetters(['geojson', 'extension'])
+    ...mapGetters(['geojson', 'extension']),
   },
   mounted() {
     //console.log(this.geojson)
     if (!this.geojson || this.geojson.trim() === '') this.$router.push('/')
-  }
+  },
 }
 </script>
 

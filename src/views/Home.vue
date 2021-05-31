@@ -10,7 +10,7 @@ import FitComponent from '@/components/Fit.vue'
 export default {
   name: 'home',
   components: {
-    FitComponent
-  }
+    FitComponent,
+  },
 }
 </script>

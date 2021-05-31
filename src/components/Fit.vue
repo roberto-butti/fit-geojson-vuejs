@@ -24,7 +24,7 @@
             :options="fileFormats"
             :clearable="false"
             :searchable="false"
-            :reduce="format => format.value"
+            :reduce="(format) => format.value"
             @input="download"
           ></v-select>
         </div>
@@ -106,41 +106,41 @@ export default {
       selectedFormat: 'geojson',
       buttonDownload: {
         href: '',
-        download: 'download.geojson'
+        download: 'download.geojson',
       },
       dropOptions: {
         url: () => '',
         autoDiscover: false,
         autoProcessQueue: false,
         acceptedFiles: '.gpx,.fit',
-        maxFiles: 1
+        maxFiles: 1,
       },
       cmOptions: {
         tabSize: 2,
         theme: 'base16-light',
         mode: 'application/json',
         lineNumbers: true,
-        line: true
+        line: true,
       },
       fileFormats: [
         {
           value: 'geojson',
-          label: 'Geojson'
+          label: 'Geojson',
         },
         {
           value: 'csv',
-          label: 'CSV'
-        }
-      ]
+          label: 'CSV',
+        },
+      ],
     }
   },
   computed: {
-    ...mapGetters(['geojson', 'extension', 'filename'])
+    ...mapGetters(['geojson', 'extension', 'filename']),
   },
   components: {
     vueDropzone: vueDropzone,
     codemirror: codemirror,
-    vSelect: vSelect
+    vSelect: vSelect,
   },
   methods: {
     get_gpx_data(node, result) {
@@ -162,8 +162,8 @@ export default {
               var trkpt = {
                 loc: [
                   parseFloat(snode.attributes['lat'].value),
-                  parseFloat(snode.attributes['lon'].value)
-                ]
+                  parseFloat(snode.attributes['lon'].value),
+                ],
               }
               for (var j = 0; j < snode.childNodes.length; j++) {
                 var ssnode = snode.childNodes[j]
@@ -255,7 +255,7 @@ export default {
               f.geometry.type = 'LineString'
               f.geometry.coordinates = [
                 [prev_position_long, prev_position_lat],
-                [element.loc[1], element.loc[0]]
+                [element.loc[1], element.loc[0]],
               ]
               geo.features.push(f)
             }
@@ -308,7 +308,7 @@ export default {
             f.geometry.type = 'LineString'
             f.geometry.coordinates = [
               [prev_position_long, prev_position_lat],
-              [element.position_long, element.position_lat]
+              [element.position_long, element.position_lat],
             ]
             geo.features.push(f)
           }
@@ -328,7 +328,7 @@ export default {
         lengthUnit: 'km',
         temperatureUnit: 'kelvin',
         elapsedRecordField: true,
-        mode: 'both'
+        mode: 'both',
       })
 
       easyFit.parse(result, (error, data) => {
@@ -346,7 +346,7 @@ export default {
       let items = JSON.parse(this.geojson).features
       const replacer = (key, value) => (value === null ? '' : value)
       const headers = ['lat', 'long', ...Object.keys(items[0].properties)]
-      items = items.map(el => {
+      items = items.map((el) => {
         for (let i of Object.keys(el.properties)) {
           el.properties[i] = Array.isArray(el.properties[i])
             ? el.properties[i].flat().join(',')
@@ -355,12 +355,12 @@ export default {
         return {
           lat: el.geometry.coordinates[0][1],
           long: el.geometry.coordinates[0][0],
-          ...el.properties
+          ...el.properties,
         }
       })
-      let csv = items.map(row =>
+      let csv = items.map((row) =>
         headers
-          .map(fieldName => JSON.stringify(row[fieldName], replacer))
+          .map((fieldName) => JSON.stringify(row[fieldName], replacer))
           .join(',')
       )
       csv.unshift(headers.join(','))
@@ -392,21 +392,17 @@ export default {
       const reader = new FileReader()
       //console.log('STATUS:', reader.readyState) // readyState will be 0
       //console.log('readin', file.size)
-      this.$store.commit(
-        'extension',
-        file.name
-          .split('.')
-          .pop()
-          .toLowerCase()
-      )
+      this.$store.commit('extension', file.name.split('.').pop().toLowerCase())
 
       this.$store.commit('filename', file.name.replace('.fit', ''))
       this.status = 'Parsing your FIT file, ' + file.size + ' bytes'
       if (this.extension == 'fit') {
-        reader.onloadend = e => this.parseFitFile(e.target.result /*, reader*/)
+        reader.onloadend = (e) =>
+          this.parseFitFile(e.target.result /*, reader*/)
         reader.readAsArrayBuffer(file)
       } else if (this.extension == 'gpx') {
-        reader.onloadend = e => this.parseGpxFile(e.target.result /*, reader*/)
+        reader.onloadend = (e) =>
+          this.parseGpxFile(e.target.result /*, reader*/)
         reader.readAsText(file)
       } else {
         this.status = 'Not a .fit ot .gpx file. Please try uploading again.'
@@ -421,11 +417,11 @@ export default {
       //console.log('PROXY:' + proxyUrl)
       let filename = this.uploadURL.split('/').slice(-1)[0]
       fetch(proxyUrl + this.uploadURL, { method: 'GET' })
-        .then(response => response.blob())
-        .then(data => new File([data], filename))
-        .then(file => this.addedfile(file))
-    }
-  }
+        .then((response) => response.blob())
+        .then((data) => new File([data], filename))
+        .then((file) => this.addedfile(file))
+    },
+  },
 }
 </script>
 
